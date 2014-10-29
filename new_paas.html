@@ -1,0 +1,1122 @@
+        <section>
+          <h1>The New PaaS:</h1>
+          <h3>Using Docker and Containers to Simplify Your Life and Accelerate Development on AWS</h3>
+          <p>
+            <small>
+              Presented by<br />
+              <a href="http://about.me/n.harrison.ripps">N. Harrison Ripps</a> / <a href="http://twitter.com/nhripps">@nhripps</a><br />
+              <a href="https://twitter.com/TheSteve0">Steven Pousty</a> / <a href="http://twitter.com/TheSteve0">@TheSteve0</a>
+            </small>
+          </p>
+        </section>
+        <section>
+          <h2>Lab Syllabus</h2>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td>
+                <ul>
+                  <li>Introduction</li>
+                  <li>Lab Tools</li>
+                  <li><a href="#/intro-paas">What is a PaaS?</a></li>
+                  <li><a href="#/intro-docker">Intro to Docker</a></li>
+                  <li>Docker Lab</li>
+                </ul>
+              </td>
+              <td>&nbsp;</td>
+              <td>
+                <ul>
+                  <li><a href="#/intro-kubernetes">Intro to Kubernetes</a></li>
+                  <li>Kubernetes Lab</li>
+                  <li><a href="#/intro-openshift-3">Intro to OpenShift 3</a></li>
+                  <li>OpenShift Lab</li>
+                  <li>Witty One-Liners</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>Important Stuff</h2>
+          <ul>
+            <li class="fragment">Bathrooms</li>
+            <li class="fragment">Breaks</li>
+            <li class="fragment">Questions</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Lab Tools</h2>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td>
+                <p>Required:</p>
+                <ul>
+                  <li>Temp. AWS account</li>
+                  <li>SSH keys</li>
+                  <li>GitHub account</li>
+                  <li>Docker account</li>
+                </ul>
+              </td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td>
+                <p>Optional:</p>
+                <ul>
+                  <li>git</li>
+                  <li>Docker</li>
+                  <li>VirtualBox</li>
+                  <li>Golang</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </section>
+ 
+        <!--WHAT IS PAAS//-->
+        <section id="intro-paas">
+          <h2>Part 1: What is a "PaaS"?</h2>
+        </section>
+        <section>
+          <h2>Cloud Services</h2>
+          <img src="images/Cloud_Levels.png" height="500" width="607" />
+        </section>
+        <section>
+          <h2>Infrastructure-as-a-Service</h2>
+          <p>
+            <ul>
+              <li>Servers in the Cloud</li>
+              <li>You build and manage everything<br />(OS, app servers, DB, application, etc.)</li>
+            </ul>
+          </p>
+          <img src="images/IaaS.png" height="216" width="314" />
+          <p>&nbsp;<br /><em>Amazon AWS, Rackspace Cloud, OpenStack</em></p>
+        </section>
+        <section>
+          <h2>Software-as-a-Service</h2>
+          <p>
+            <ul>
+              <li>Someone else's app, hosted in the cloud</li>
+              <li>You are restricted to the features of the application&mdash;<br />You get what they give you.</li>
+            </ul>
+          </p>
+          <img src="images/SaaS.png" height="220" width="506" />
+          <p>&nbsp;<br /><em>SalesForce.com, Google Apps, iCloud</em></p>
+        </section>
+        <section>
+          <h2>Platform-as-a-Service</h2>
+          <ul>
+            <li>Quickly build (or try out) the applications that you need.</li>
+            <li>Code applications that can live on a hybrid cloud.</li>
+            <li>Leverage the <em>ease</em>, <em>scale</em> and <em>power</em> of the Cloud.<br />&nbsp;</li>
+          </ul>
+          <img src="images/PaaS.png" style="height: 151px; width: 593px; padding-left: 10px; padding-right: 10px;" />
+          <table style="margin-left: auto; margin-right: auto; width: 593px">
+            <tr>
+              <td style="font-size: smaller; font-style: italic; text-align: center; width: 20%;">Code</td>
+              <td style="font-size: smaller; font-style: italic; text-align: center; width: 15%;">&nbsp;</td>
+              <td style="font-size: smaller; font-style: italic; text-align: center; width: 30%;">Deploy</td>
+              <td style="font-size: smaller; font-style: italic; text-align: center; width: 15%;">&nbsp;</td>
+              <td style="font-size: smaller; font-style: italic; text-align: center; width: 20%;">Enjoy</td>
+            </tr>
+          </table>
+          <aside class="notes">
+            PaaS is the ideal level for interfacing the platform with source code as the input. IaaS
+            still requires weeks of setup time to get everything running. Something like an MBaaS is
+            too intrusive (with all its code generation and such). PaaS is really the sweet spot for
+            developers and those tasked with deploying applications.
+          </aside>
+        </section>
+        <section>
+          <h2>What can you do with OpenShift?</h2>
+          <img style="height: 500px; border: 0px;" src="images/Supported_Stuff.png" />
+        </section>
+        <section>
+          <h2>How Does It Work?</h2>
+          <img style="border: 0px;" src="images/lxc_architecture.png" />
+          <p>It starts with multi-tenancy via linux containers...</p>
+        </section>
+        <section>
+          <h2>How Does It Work?</h2>
+          <img style="border: 0px;" src="images/simplified_openshift_diagram.png" />
+          <p>...and adds central management with easily scaled deployments</p>
+        </section>
+        <section>
+          <h2>Quick Demo:<br />OpenShift Now</h2>
+ 
+          <p>&nbsp;<br />Create a new PHP app from the command line:</p>
+ 
+          <pre><code>rhc app create newphp -t php-5.4</code></pre>
+ 
+          <p>&nbsp;<br />Enter the new local git repo and modify a file:</p>
+ 
+          <pre><code>cd newphp
+vim index.php</code></pre>
+ 
+          <p>&nbsp;<br />Commit the change, push it to the app:</p>
+ 
+          <pre><code>git commit -am "Comment"
+git push</code></pre>
+ 
+          <aside class="notes">
+            There are two ways to build apps with OpenShift. You can start them either from the web UI
+            or from the command line. In this example we'll use the command line, but everything we do
+            here is available from the web interface as well.
+          </aside>
+        </section>
+        <section>
+          <h2>So Why a <em>New</em> PaaS?</h2>
+          <ul>
+            <li>Three years in, we've learned a <em>lot</em> about PaaS</li>
+            <li>As more people focus on PaaS, more tools are becoming available</li>
+            <li>We want to combine the best user experience in PaaS with the best underlying technologies</li>
+          </ul>
+          <aside class="notes">
+            What Red Hat does is build on and foster the best open source technologies.  When OpenShift
+            began those technologies were RHEL, selinux, cgroups, etc.  Three years later we have a lot
+            of additional choices and we are again going to pick the best ones available.
+          </aside>
+        </section>
+ 
+        <!--DOCKER//-->
+        <section id="intro-docker">
+          <h2>Part 2: Docker</h2>
+          <img style="height: 500px; background-color: #FFF;" src="images/docker-logo.png" alt="Docker.io Logo" />
+          <aside class="notes">
+            Ten minute break and then we'll start talking about Docker, which is the first piece of the new OpenShift architecture.
+          </aside>
+        </section>
+        <section>
+          <h2>What is a Container?</h2>
+          <table>
+            <tr>
+              <td><img style="height: 300px;" src="images/docker_container.jpg" alt="Diagram of a multi-layered docker container" /></td>
+              <td style="vertical-align: middle;">
+                <ul>
+                  <li>In Docker parlance, a <em>container</em> is a running instance of an <em>image</em></li>
+                  <li>Based on linux containers (namepaces, control groups)</li>
+                  <li>Combines file system <em>layers</em> into a "Union File System"</li>
+                  <li>Includes all of the components necessary to run a process, store persistent data, or both</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>Containers vs. VMs</h2>
+          <img style="height: 500px;" src="images/docker_vm_diagram.jpg" alt="Docker and VM comparison diagram" />
+        </section>
+        <section>
+          <h2>Containers vs. VMs</h2>
+          <img style="height: 500px;" src="images/docker_vs_kvm.png" alt="Docker and VM comparison diagram" />
+          <aside class="notes">
+            Article source: <a href="http://www.theregister.co.uk/2014/08/18/docker_kicks_kvms_butt_in_ibm_tests/">http://www.theregister.co.uk/2014/08/18/docker_kicks_kvms_butt_in_ibm_tests/</a>
+          </aside>
+        </section>
+        <section>
+          <h2>Layers and UFS</h2>
+          <img style="height: 500px;" src="images/docker_container.jpg" alt="Diagram of a multi-layered docker container" />
+        </section>
+        <section>
+          <h2>Layers and UFS</h2>
+          <ul>
+            <li>One or more read-only file systems and one read/write file system</li>
+            <li>All presented as a single file system via <a href="http://aufs.sourceforge.net/">aufs</a></li>
+            <li>Behavior is similar to using a LiveCD</li>
+          </ul>
+          <p>&nbsp;<br />"Data Volume Container": A Docker container with only a read/write file system, either stricly within the container or linked to real storage on the host</p>
+        </section>
+        <section>
+          <h2>Images: More like <code>git</code> than <code>tar</code></h2>
+          <ul>
+            <li>Images can be pulled <em>from</em> and pushed <em>to</em> a remote registry.</li>
+            <li>Images can be versioned and tagged.</li>
+            <li>Cartridges can be <code>diff</code>ed to show how they differ from their base images.</li>
+          </ul>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ## Pulling and Pushing Images
+ 
+            Download docker images with the `pull` command:
+ 
+                $ docker pull centos
+                Pulling repository centos
+                b1bd49907d55: Downloading [=================>] 73.89 MB/74.1 MB 33s
+                b157b77b1a65: Pulling dependent layers 
+                511136ea3c5a: Download complete 
+                34e94e67e63a: Download complete 
+ 
+            Publish images with the `push` command:
+ 
+                $ docker push nhripps/centos
+                The push refers to a repository [nhripps/centos] (len: 1)
+                Sending image list
+                Pushing repository nhripps/centos (1 tags)
+                511136ea3c5a: Image already pushed, skipping 
+                34e94e67e63a: Image already pushed, skipping 
+                b1bd49907d55: Image already pushed, skipping 
+                589b2f903ada: Image successfully pushed 
+                Pushing tag for rev [589b2f903ada] on {https://cdn-registry-1.docker.io/v1/repositories/nhripps/centos/tags/wget}
+ 
+          </script>
+        </section>
+        <section>
+          <h2>Versioning / Tagging</h2>
+ 
+          <p>Find the image ID:</p>
+ 
+          <pre><code>$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+nhripps/nodesrv     v1                  fe809d275af3        18 hours ago        864.9 MB
+node                latest              32b8e915efd9        3 weeks ago         864.9 MB
+centos              centos6             b1bd49907d55        5 weeks ago         212.5 MB
+centos              centos7             b157b77b1a65        5 weeks ago         243.7 MB
+centos              latest              b157b77b1a65        5 weeks ago         243.7 MB</code></pre>
+ 
+          <p>Create the tag:</p>
+ 
+          <pre><code>$ docker tag fe809d275af3 nhripps/nodesrv:latest</code></pre>
+ 
+          <pre><code>$ docker images nhripps/nodesrv
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+nhripps/nodesrv     v1                  fe809d275af3        18 hours ago        864.9 MB
+nhripps/nodesrv     latest              fe809d275af3        18 hours ago        864.9 MB</code></pre>
+        </section>
+        <section>
+          <h2>Container Operations</h2>
+          <p>Instantiate a Docker container with <code>docker run</code>:</p>
+          <pre><code>$ docker run -i -t nhripps/centos /bin/bash
+bash-4.1# exit
+exit</code></pre>
+          <p>&nbsp;<br />List running and exited docker processes with <code>docker ps</code>:</p>
+          <pre><code>$ docker ps -l
+CONTAINER ID  IMAGE                  COMMAND      CREATED         STATUS      NAMES
+7c4ef3596fa5  nhripps/centos:latest  "/bin/bash"  49 seconds ago  Exited (0)  grave_newton</code></pre>
+          <p>&nbsp;<br />Rejoin containers with <code>docker attach</code>:</p>
+          <pre><code>$ docker start grave_newton
+grave_newton
+$ docker attach grave_newton
+bash-4.1# exit
+exit</code></pre>
+        </section>
+        <section>
+          <h2>"Diffing" a Container</h2>
+          <p>Run a Docker image and perform some actions:</p>
+          <pre><code>$ docker run -i -t --name="add_wget" nhripps/centos /bin/bash
+bash-4.1# yum install -y wget
+...
+bash-4.1# exit</code></pre>
+          <p>Run a diff on the container after it has run:</p>
+          <pre><code>$ docker diff add_wget
+C /.bash_history
+C /etc
+A /etc/wgetrc
+C /tmp
+C /usr
+C /usr/bin
+A /usr/bin/wget
+C /usr/share
+C /usr/share/doc
+A /usr/share/doc/wget-1.12
+...</code></pre>
+        </section>
+        <section>
+          <h2>Docker Containers as Daemons</h2>
+          <img style="height: 400px;" src="images/docker_bunny.png" alt="Docker Containers Just Keep Going..." />
+          <p>A docker container runs until:</p>
+          <ul>
+            <li>The process inside it exits <em>or</em></li>
+            <li>You stop it with <code>docker stop &lt;container_name&gt;</code></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Docker Containers as Daemons</h2>
+          <p>&nbsp;<br />Start a container as a detached process with <code>docker run -d</code>:</p>
+          <pre><code>$ docker run -d nhripps/nginx:base
+1aa9f0bd1418f951a590c12ad717ea8af639dd29969ee3f59dfd87da1da23c4e
+$ docker ps
+CONTAINER ID  IMAGE               COMMAND               PORTS   NAMES
+1aa9f0bd1418  nhripps/nginx:base  "/bin/sh -c '/usr/sb  80/tcp  elegant_bell</code></pre>
+          <p>&nbsp;<br />Use the <code>-P</code> flag to automatically map container ports to the Docker host:</p>
+          <pre><code>$ docker run -d -P nhripps/nginx:base
+1c2e06d8f85e6e034dfd1f7e822b32ed3f4ddf1d5760011d1e84a88a589f50f3
+$ docker ps
+CONTAINER ID  IMAGE               COMMAND               PORTS                  NAMES
+1c2e06d8f85e  nhripps/nginx:base  "/bin/sh -c '/usr/sb  0.0.0.0:49153->80/tcp  loving_mclean</code></pre>
+        </section>
+        <section>
+          <h2>Linking Containers</h2>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td><img style="background-color: #FFF;" src="images/docker_links.png" alt="Docker links diagram" /></td>
+              <td style="vertical-align: middle;">
+                <ul>
+                  <li>Containers on the same host can be linked together</li>
+                  <li>Links between containers are not accessible outside the host</li>
+                  <li>Links are shared via ENV and /etc/hosts</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>Linking Containers</h2>
+          <p>&nbsp;<br />Start a daemon container as normal, but without mapping any ports:</p>
+          <pre><code>$ docker run -d --name db training/postgres
+b4309b7dbbe1f43fd34720c96f496c3453c43ea735731b0888278aa26fe18f96</code></pre>
+          <p>&nbsp;<br />Now use the <code>--link</code> argument with a new container:</p>
+          <pre><code>$ docker run -d -P --name web --link db:db training/webapp python app.py
+18eeef892d63ea3cb5f1fb3cb61d359284c74b22775a2e72f5af4cca5b35ce59</code></pre>
+          <p>&nbsp;<br />See how the first container has been mapped to the second:</p>
+          <pre><code>$ docker ps
+CONTAINER ID  IMAGE                     COMMAND               PORTS                    NAMES
+18eeef892d63  training/webapp:latest    "python app.py"       0.0.0.0:49153->5000/tcp  web
+b4309b7dbbe1  training/postgres:latest  "su postgres -c '/us  5432/tcp                 db,web/db</code></pre>
+        </section>
+        <section>
+          <h2>Docker: Pros and Cons</h2>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td>
+                <p>PROS:</p>
+                <ul>
+                  <li>Extreme application portability</li>
+                  <li>Very easy to create and work with derivative images</li>
+                  <li>Fast boot on containers</li>
+                </ul>
+              </td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td>
+                <p>CONS:</p>
+                <ul>
+                  <li>Host-centric solution; not aware of anything else</li>
+                  <li>No higher-level provisioning</li>
+                  <li>No usage tracking / reporting</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>Lab: Get to Know Docker</h2>
+          <img style="height: 600px;" src="images/lab1.png" alt="Docker Lab" />
+        </section>
+ 
+        <!--KUBERNETES//-->
+        <section id="intro-kubernetes">
+          <h2>Part 3: Kubernetes</h2>
+          <img src="images/kubernetes-ship4.png" alt="Docker.io Logo" />
+          <p>(Logo concept #1: See, it's like a ship that carries other ships...)</p>
+          <aside class="notes">
+            What is Kubernetes? When I made this slide I had only a vague concept of what
+            Google's Kubernetes project was about, but I knew it was doing something at
+            a higher level than Docker. As of yet there are no cool logos for Kubernetes,
+            so I am going to make some proposals as we go through.
+          </aside>
+        </section>
+        <section>
+          <h2>Kubernetes:</h2>
+          <p>"Greek for 'pilot' or 'helmsman'."<br />&nbsp;</p>
+          <p class="fragment"><strong><span style="color: #F00;">Φ</span>ιλοσοφία <span style="color: #F00;">Β</span>ιοῦ <span style="color: #F00;">Κ</span>υβερνήτης</strong><br />Philosophia Biou Kubernetes: "Love of wisdom, the guide of life"</p>
+          <p class="fragment">&nbsp;<br /><a href="http://azure.microsoft.com/blog/2014/08/28/hackathon-with-kubernetes-on-azure/">"Declarative cluster management for Docker."</a></p>
+          <div class="fragment">
+            <img style="border: 0px;" src="images/confused.png" alt="I have no idea what that means." />
+          </div>
+          <aside class="notes">
+            <p>So I Googled "Kubernetes", figuring that would be helpful here. First,
+            I learned that Kubernetes is a Greek word meaning 'pilot' or 'helmsman'.
+            Okay, I sort of see where you're going...</p>
+            <p>Next stop was an article that sounded really official and it claimed
+            that Kubernetes was all about declarative cluster management. Oh! Well
+            why didn't you say so before? That explains everything! Um, or not?
+            I'm not even sure anymore...</p>
+            <p>So, since we've all just gotten our hands dirty with Docker, I'm going to
+            start explaining Kubernetes in terms of things that Docker <em>doesn't</em>
+            do.</p>
+          </aside>
+        </section>
+        <section>
+          <h2>Docker Don'ts</h2>
+          <ol>
+            <li class="fragment">Docker doesn't see beyond a single host</li>
+            <li class="fragment">Docker can't provision related containers as a unit</li>
+            <li class="fragment">Docker doesn't have any capacity for handling mass configuration &amp; deployment.</li>
+          </ol>
+          <div class="fragment">
+            <h3>Solution:</h3>
+            <img src="images/kubergortons.png" alt="Kubernetes logo concept #2" />
+            <p><small>(Logo concept #2)</small></p>
+          </div>
+          <aside class="notes">
+            <p>The entire docker lab could be done with a single host instance. That's a
+            by-product of Docker's chief limitation as a host-centric technology. This wasn't
+            an <em>oversight</em> as much as a scope boundary.</p>
+            <p>Even within the single-host scope, Docker doesn't provide for managing related containers as a group. If you want
+            to run a web server container alongside a database container, you have to do them one at a time.</p>
+            <p>Another problem related to the host-level focus is that Docker itself doesn't have
+            any sort of mass provisioning for containers. This includes configuration, deployment, and ongoing management.</p>
+            <p>To Docker's credit, they have specifically determined that this stuff is out of scope for their project. However,
+            it left a big opening for technologies to come along and solve. Solution? Kubernetes.</p>
+          </aside>
+        </section>
+        <section>
+          <h2>Kuberenetes Terminology</h2>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td><img style="border: 0px;" src="images/kubernetes_minion.png" alt="Kubernetes minion diagram" /></td>
+              <td>&nbsp;</td>
+              <td style="vertical-align: middle;">
+                <dl>
+                  <dt>Minion</dt>
+                  <dd>A Docker host running the <em>kubelet</em> and the <em>proxy</em> service.<br />&nbsp;</dd>
+                  <dt>Pod</dt>
+                    <dd>One or more inter-related (linked) Docker containers.<br />&nbsp;</dd>
+                  <dt>Cluster</dt>
+                    <dd>A collection of one or more Minions.</dd>
+                </dl>
+              </td>
+            </tr>
+          </table>
+          <aside class="notes">
+            <p>Now we can start to get in to what Kubernetes does for Docker deployments. Let's begin with
+            some terminology...</p>
+            <p>Notice also the services that are running on this minion. Docker is the obvious one but the other three are new.
+          </aside>
+        </section>
+        <section>
+          <h2>etcd</h2>
+          <ul>
+            <li>Highly available key/value data store</li>
+            <li>Built-in clustering support</li>
+            <li>RAFT consensus-based algorithm for updates</li>
+          </ul>
+          <img src="images/etcd_raft_consensus.gif" alt="Visualization of raft consensus" />
+          <aside class="notes">
+            <p>First, etcd. This is a highly available key/value store that provides the de-facto messaging layer
+            between each minion and a central controller. Strictly speaking, etcd doesn't <em>need</em> to live on
+            each minion, or on any minion. As long as there are one or more reachable instances of etcd that a
+            minion can communicate with, Kubernetes continues working.</p>
+            <p>etcd instances handle their own clustering. If you really want to get into the weeds, they
+            use the RAFT consensus algorithm to decide on the true current value for a given key. It makes
+            for a cool graphic, but we don't need to get deeper than this to use etc with Kubernetes.</p>
+          </aside>
+        </section>
+        <section>
+          <h2>Minion Daemon:<br /><code>kubernetes-kubelet</code></h2>
+          <img style="border: 0px;" src="images/kubelet.png" alt="Kubelet works between etcd and docker." />
+          <ul>
+            <li>Primary responsilibity: pod management</li>
+            <li>Maintain a record of pod state</li>
+            <li>Take instructions from the cluster <em>master</em></li>
+          </ul>
+          <aside class="notes">
+            <p>Now, the other minion-based process is called kubelet. Its main job is pod management,
+            which really means that its main job is talking to docker. The kubelete daemon interprets
+            pod definitions in docker terms and makes the right commands to get the desired behavior.
+            All docker functionality is available through kubelet and pods.</p>
+            <p>In addition to managing docker, the kubelet has another job, which is to keep track of
+            pod running states. The kubelet is periodically polled by cluster management processes
+            to know how the cluster is doing.</p>
+            <p>Finally, another feature of the kubelet that is in the works is the ability for the
+            kubelet to register its minion with the cluster. Right now minions have to be introduced
+            manually, but when this feature is in place, a kubelet with the right credentials can join
+            a cluster automatically.</p>
+          </aside>
+        </section>
+        <section>
+        <section>
+          <h2>Minion Daemon:<br /><code>kubernetes-proxy</code></h2>
+          <img style="border: 0px; height: 200px;" src="images/kubernetes_proxy.png" alt="The proxy maps a single port on the minion to all relevant pods" />
+          <p>&nbsp;</p>
+          <ul>
+            <li>The proxy service maps a common port <em>on every minion</em> to relevant pods <em>across the entire cluster</em><br />&nbsp;</li>
+            <li>Relevant pods are chosen by comparing a <em>label</em> on the proxy definition to labels on the running pods<br />&nbsp;</li>
+            <li>This mapping of a minion host port to a pod label is called a <strong>service</strong></li>
+          </ul>
+          <aside class="notes">
+            <p>The interesting thing about the service proxy is that every minion gets all of the
+            service proxy rules, regardless of which pods are actually running on the them. The
+            job of the proxy starts with the question: "does this minion have any pods that match
+            each of the service labels that I know about?"</p>
+            <p>In this diagram, the proxy knows about three services. But looking over the pods that
+            are running, the proxy sees that it can't handle requests for the mongo service. On the
+            other hand, it's got two running pods that match the 'nginx' label, so it will handle the
+            routing and traffic management to those pods.</p>
+            <p>The proxy service is <em>not</em> responsible for managing pods. All it does is indicates
+            whether or not the minion can handle a given service request, and if there's more than one
+            pod that can satisfy the request, it does the traffic management.</p>
+          </aside>
+        </section>
+        <section>
+          <h2>More on Labels</h2>
+          <img style="height: 350px; background-color: #FFF;" src="images/labels.jpg" alt="A lot of labels" />
+          <ul>
+            <li>A label or consists of a key and a value (also called a <em>selector</em>)</li>
+            <li>A pod can have any number of labels; each label must have a unique <em>key</em></li>
+            <li>Examples: <code>service=nginx</code>, <code>environment=prod</code>, <code>tier=frontend</code></li>
+          </ul>
+          <aside class="notes">
+            <p>At this point we should probably talk a little more about labels. This is a concept that is
+            central to the Kubernetes design, but it somewhat hidden by the implementation.</p>
+          </aside>
+        </section>
+        </section>
+        <section>
+          <h2>Cluster Management</h2>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td><img style="border: 0px;" src="images/kubernetes_master.png" alt="Kubernetes cluster master diagram" /></td>
+              <td>&nbsp;</td>
+              <td style="vertical-align: middle;">
+                <dl>
+                  <dt>Kubernetes API</dt>
+                  <dd>RESTful web API for Kubernetes, running on nginx<br />&nbsp;</dd>
+                  <dt>Scheduler</dt>
+                  <dd>One job: choose minions for pods<br />&nbsp;</dd>
+                  <dt>Controller Manager</dt>
+                  <dd>Monitoring service for deployed pods<br />&nbsp;</dd>
+                  <dt><code>kubecfg</code></dt>
+                    <dd>CLI for working with a Kubernetes cluster</dd>
+                </dl>
+              </td>
+            </tr>
+          </table>
+          <aside class="notes">
+            <p>A cluster master is a host that acts as both a front end and health monitor for a Kubernetes cluster. The
+            master it self does not run docker and therefore does not host pods. Instead, it provides a web API and runs
+            a simple monitoring service that checks for the existence of specified pod deployments.</p>
+            <p>Finally, the cluster master also provides a utility called kubecfg that enables users to interact with the
+            cluster.</p>
+          </aside>
+        </section>
+        <section>
+          <h2>The Kubernetes API</h2>
+          <ul>
+            <li>Minions (docker hosts)</li>
+            <li>Pods (docker container configurations)</li>
+            <li>Services (port proxy mappings)</li>
+            <li><em>Replication Controllers</em> (replicated, monitored pod deployments)</li>
+          </ul>
+          <img src="images/kubersnoopy.png" alt="Kubernetes logo concept #3" />
+          <p><small>(Logo concept #3)</small></p>
+          <aside class="notes">
+            <p>By now we've already covered most of the things that are available through the API.
+            However, there's one last piece to talk about, and that is something called a Replication
+            Controller.</p>
+            <p>Pods and minions are really just convenient ways of managing docker hosts and containers.
+            Service and Replication Controllers bring us that cluster management thinking that really
+            defines Kubernetes.</p>
+          </aside>
+        </section>
+        <section>
+          <h2><code>controller-manager</code><br />and Replication Controllers</h2>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td><img src="images/controller_manager.png" alt="You tell controller-manager what you need, and it does the rest." /></td>
+              <td>&nbsp;</td>
+              <td style="vertical-align: middle;">
+                <ul>
+                  <li>You tell it what you need, it decides which minions to deploy on</li>
+                  <li>Constant monitoring; starts and stops pods as necessary to match the count</li>
+                  <li>Decoupled from service proxying</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2><code>kubecfg</code></h2>
+          <p>Set up and manage replication controllers</p>
+          <pre><code>kubecfg -p 8080:80 run dockerfile/nginx 2 myNginxController</code></pre>
+          <p>&nbsp;<br />Perform CRUD operations against the RESTful Kubernetes API</p>
+          <pre><code>kubecfg <-c some/body.[json|yaml]> [options] update pods/pod-abc-123</code></pre>
+          <p>&nbsp;<br />Requires JSON or YAML configured input for CRUD operations</p>
+          <pre><code>{
+  "id": "pulpdb",
+  "kind": "Pod",
+  "apiVersion": "v1beta1",
+  "labels": {
+    "name": "db"
+  },
+  "desiredState": {
+    "manifest": {
+      "version": "v1beta1",
+      "id": "pulp_db",
+      "containers": [{
+        "name": "pulp-db",
+        "image": "markllama/mongodb",
+        "ports": [{
+          "containerPort": 27017,
+        }]
+      }]
+    }
+  }
+}</code></pre>
+        </section>
+        <section>
+          <h2>Lab: Hands-on With Kubernetes</h2>
+          <img src="images/kubernetes_lab.png" alt="Kubernetes logo concept #4" />
+          <p><small>(Logo concept #4)</small></p>
+        </section>
+ 
+        <!--OPENSHIFT 3: How is it built?//-->
+        <section id="intro-openshift-3">
+          <h2>Part 4:</h2>
+          <img style="height: 500px; background-color: #FFF;" src="images/openshift_logo.png" alt="OpenShift Logo" />
+          <aside class="notes">
+            <p>So far today, we've introduced Docker for running containerized applications, and we've
+            introduced Kubernetes as a cluster management layer over the top. But when we compare that
+            to a complete Platform-as-a-Service system, we can see a number of gaps. So just as we started
+            describing Kubernetes in terms of what Docker is missing, let's start talking about the new
+            OpenShift architecture in terms of what Kubernetes is missing... aside from a logo, of course.</p>
+          </aside>
+        </section>
+        <section>
+          <h2>Kubernetes Don'ts</h2>
+          <p>&nbsp;</p>
+          <ul>
+            <li class="fragment">No concept of a complete <em>application</em>.</li>
+            <li class="fragment">No capacity for building and deploying Docker images from source code.</li>
+            <li class="fragment">No <em>lifecycle</em> (CI / staging / production).</li>
+            <li class="fragment">No inherent focus on a user or administrator <em>experience</em>.</li>
+          </ul>
+          <div class="fragment">
+            <img style="height: 300px;" src="images/keep-calm-and-code-on.png" />
+          </div>
+        </section>
+        <section>
+          <h2>Defining an Application</h2>
+          <p>&nbsp;</p>
+          <img class="fragment" style="border: 0px;" src="images/yo_app.png" />
+          <aside class="notes">
+            <p>But in the context of Docker and Kubernetes, what <em>is</em> an application?</p>
+            <p>Think about the most basic, ridiculously simple cloud app that anyone has ever developed.</p>
+            <p>In the container era, even <em>this</em> is more complicated than a simple web frontend.</p>
+          </aside>
+        </section>
+        <section>
+          <h2>Applications =<br />Distinct Interconnected Services</h2>
+          <img style="border: 0px; height: 300px;" src="images/interconnected.jpg" />
+          <ul>
+            <li><strong style="color: #F66;">Distinct</strong>: App components must be abstracted so that they can evolve independently</li>
+            <li><strong style="color: #F66;">Interconnected</strong>: Every component should be easy to build, manage and deploy in concert</li>
+          </ul>
+          <aside class="notes">
+            <p>So now we're thinking about applications differently. Pieces aren't just modular; they're actually completely distinct components
+            separated by network APIs.</p>
+          </aside>
+        </section>
+        <section>
+          <h2>Applications in OpenShift 3</h2>
+          <p>&nbsp;</p>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td style="width: 378px;"><img style="border: 0px; width: 373px; height: 241px;" src="images/application.png" /></td>
+              <td>&nbsp;</td>
+              <td style="vertical-align: middle;">
+                <p><code style="color: #F66;">config</code>, <em style="color: #CCC;">n.</em><br />A collection of Kubernetes <em>and</em> OpenShift 3 objects that describes any combination of pods, services, replicationControllers, environment variables and OpenShift 3 objects that we'll discuss in a few slides.<br />&nbsp;</p>
+                <p><code style="color: #F66;">template</code>, <em style="color: #CCC;">n.</em><br />A <em>parameterized</em> version of a config for generalized re-use.</p>
+              </td>
+            </tr>
+          </table>
+          <aside class="notes">
+            <p>Now let's take a more concrete look at applications. Given that we are already thinking differently about them, what
+            do they actually look like in a Kubernetes and Docker based system?</p>
+          </aside>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ## The config Template</h2>
+ 
+            <p>&nbsp;</p>
+ 
+                {
+                  "id": "ruby-helloworld-sample-template",
+                  "kind": "Template",
+                  "name": "ruby-hello-world-template",
+                  "parameters": [{
+                      "name": "ADMIN_USERNAME",
+                      "description": "Administrator username",
+                      "type": "string",
+                      "expression": "admin[A-Z0-9]{3}"
+                  }],
+                  "items": [{
+                      "id": "frontend",
+                      "kind": "Service",
+                      "port": 5432,
+                      "selector": { "name": "frontend" }
+                  }]
+                }
+ 
+            <p>&nbsp;</p>
+ 
+            * **parameters**: Variables that can be set at the application level and used across Kubernetes objects
+            * **items**: One or more Kubernetes or OpenShift 3 object definitions that you wish to specify, **including another `config`**
+ 
+            <aside class="notes">Would we ever <em>want</em> to include a config template inside of another config template? I'm sure we could think of some cases. However, an OpenShift 3 system will include a set of curated templates that look a lot like the cartridges and quickstarts that we have today.</aside>
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ## Parameters
+ 
+            Defined (in the `template`):
+ 
+                {
+                  "name": "ADMIN_USERNAME",
+                  "description": "Administrator username",
+                  "type": "string",
+                  "expression": "admin[A-Z0-9]{3}"
+                }
+ 
+            Applied (in the `template`):
+ 
+                "env": [{
+                  "name": "ADMIN_USERNAME",
+                  "value": "${ADMIN_USERNAME}"
+                }]
+ 
+            Post-processed (in the `config`):
+ 
+                "env": [{
+                  "name": "ADMIN_USERNAME",
+                  "value": "adminS5G"
+                }]
+ 
+            <p>&nbsp;</p>
+ 
+            * Can be hard-coded, generated, or a mix of both.
+            * Can be used in any of the `item` configurations in a `config`.
+          </script>
+        </section>
+        <section>
+          <h2>Building Applications from Source</h2>
+          <p>Three challenges to consider:</p>
+          <img style="border: 0px;" src="images/assembly_line.png" />
+          <ul>
+            <li>Getting at the source code? <span class="fragment"><strong style="color: #F66;">GitHub (and others)</strong></span></li>
+            <li>Driving new builds when the source code changes? <span class="fragment"><strong style="color: #F66;">Webhooks</strong></span></li>
+            <li>Building new Docker images based on the source code? <span class="fragment"><strong style="color: #F66;">...hm.</strong></span></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Build Option #1:<br /><code>docker-builder</code></h2>
+          <p>&nbsp;</p>
+          <ol>
+            <li class="fragment">A docker image that quietly co-opts the host docker's socket</li>
+            <li class="fragment">Pulls down new/updated source code from a Git URL</li>
+            <li class="fragment">Per the app Dockerfile, pulls down base engine images (like ruby, node, golang, etc.) into the host Docker repository</li>
+            <li class="fragment">Uses <code>docker build</code> to load and compile the source on top of the base image</li>
+            <li class="fragment">Pushes the resulting image into a <em>private</em>, <em>hosted</em> Docker registry somewhere in the cluster</li>
+            <li class="fragment">Quietly fades away into darkness like it was never there.</li>
+          </ol>
+          <aside class="notes">
+            When my fellow engineers on the OpenShift team explained how this worked to me, my mind basically exploded.
+          </aside>
+        </section>
+        <section>
+          <img style="border: 0px; height: 600px;" src="images/dockerception.png" />
+        </section>
+        <section>
+          <h2>Build Option #2:<br />Source-to-Image (<code>sti</code>)</h2>
+          <p>&nbsp;</p>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td><img style="border: 0px; height: 400px;" src="images/ship_blueprint.png" /></td>
+              <td>&nbsp;</td>
+              <td style="vertical-align: middle;">
+                <ul>
+                  <li>Relies on specially-built STI Docker images</li>
+                  <li>Behavior reminiscent of OpenShift 2 cartridges</li>
+                  <li>Invocation reminiscent of <code>kubecfg run</code>:<br /><pre><code>sti build &lt;src&gt; &lt;image&gt; &lt;tag&gt;</code></pre></li>
+                  <ul>
+                    <li><code>src</code>: Source code URI</li>
+                    <li><code>image</code>: The STI builder image to use</li>
+                    <li><code>tag</code>: The tag for the resulting Docker app image</li>
+                  </ul>
+                </ul>
+              </td>
+            </tr>
+          </table>
+          <aside class="notes">
+            <p>The problem with docker-builder is that it depends on a Dockerfile in order to run. However, OpenShift doesn't like lock-in. When your code includes a Dockerfile, it starts to always look like a Docker image. So the alternative to explicitly using Dockerfiles is a build path called Source-to-Image.</p>
+            <p>The purpose-built STI docker images contain a base image along with <em>assemble</em> and <em>run</em> scripts that tell the running container how to process the source code that is passed in. This is functionally equivalent to what a Dockerfile can do, but developers don't have to think in terms of Dockerfiles to use it.</p>
+          </aside>
+        </section>
+        <section>
+          <h2>Builds in OpenShift 3</h2>
+          <p>&nbsp;</p>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td>
+                <p><code style="color: #F66;">buildConfig</code>, <em style="color: #CCC;">n.</em><br />An object containing three key pieces of information about an application that will be automatically built and rebuilt by OpenShift:</p>
+                <ul>
+                  <li>The source code URI</li>
+                  <li>The build type (Docker or STI)</li>
+                  <li>The authentication code for change notifications (webhooks)</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>Application Lifecycle:</h2>
+          <h3>Integrating with CI and CD through "triggers"</h3>
+          <img src="images/app_lifecycle.png" />
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td>
+                <p>Make a platform that is aware of changes:<br />&nbsp;</p>
+                <ul>
+                  <li>In source code</li>
+                  <li>On a CI system</li>
+                  <li>In an image repository<br />&nbsp;</li>
+                </ul>
+                <p>...so that the entire product lifecycle is<br /><em>repeatable</em>, <em>fault-tolerant</em> and <em>automated</em>.</p>
+              </td>
+            </tr>
+          </table>
+          <aside class="notes">
+            When we talk about DevOps, we are talking about an environment where we continously iterate and deploy application code based on a series of gating operations.
+          </aside>
+        </section>
+        <section>
+          <h3>Lifecycle in OpenShift 3:</h3>
+          <h2>The Deployment</h2>
+          <img style="border: 0px;" src="images/skydiving.png" />
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td>
+                <p><code style="color: #F66;">deployment</code>, <em style="color: #CCC;">n.</em><br />The combination of:</p>
+                <ul>
+                  <li>A replicationController that describes a desired running state.</li>
+                  <li>One or more <em>trigger policies</em> for driving the deployment</li>
+                  <li>A deployment <em>strategy</em> for performing the deployment</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>Deployment Trigger Policies</h2>
+          <p>&nbsp;</p>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td style="text-align: center;" class="fragment">
+                <p>Manual</p>
+                <img style="border: 0px; height: 360px; width: 240px;" src="images/trigger_manual.png" />
+              </td>
+              <td style="text-align: center;" class="fragment">
+                <p>Image change</p>
+                <img style="border: 0px; height: 360px; width: 240px;" src="images/trigger_docker.png" />
+              </td>
+              <td style="text-align: center;" class="fragment">
+                <p><code>config</code> change</p>
+                <img style="border: 0px; height: 360px; width: 240px;" src="images/trigger_config.png" />
+              </td>
+            </tr>
+          </table>
+          <aside class="notes">
+            <p>Manual: you tell OpenShift to run the deployment.</p>
+            <p>Image change: OpenShift 3 watches the state of images in the cluster's private Docker repo. When an image is updated, redeployment is triggered.</p>
+            <p>config change: If I change the definition of my configu file, redeploy the pieces covered in the deployment configuration.</p>
+          </aside>
+        </section>
+        <section>
+          <h2>Deployment Strategies</h2>
+          <ul>
+            <li>Not <em>how</em> to handle deployments, but <em>who</em> to handle deployments</li>
+            <li>Currently supported: "customPod" (i.e. "hand the task off to a customPod of a specific name.")
+            <li class="fragment">Theoretical alternatives:</li>
+            <ul>
+              <li class="fragment"><em>thirdPartyDeployment</em> - job goes to a separate system</li>
+              <li class="fragment"><em>controllerService</em> - job goes to a service in the deployment controller</li>
+              <li class="fragment"><em>conciergeService</em> - Standish be a good fellow and handle this, eh?<br /><img style="border: 0px;" src="images/concierge_service.jpg" /></li>
+            </ul>
+          </ul>
+        </section>
+        <section>
+          <h2>New Concepts Summary</h2>
+          <p>&nbsp;</p>
+          <ul>
+            <li>Configurations</li>
+            <ul>
+              <li>Collections of Kubernetes and OpenShift 3 objects</li>
+              <li>Parameterized templates</li>
+              <li>Post-processed <code>configs</code></li>
+            </ul>
+            <li>Builds</li>
+            <ul>
+              <li>Where is the code coming from?</li>
+              <li>How do we turn it into a Docker image?</li>
+            </ul>
+            <li>Deployments</li>
+            <ul>
+              <li>When do we deploy?</li>
+              <li>How do we deploy?</li>
+              <li>What should the deployment look like?</li>
+            </ul>
+          </ul>
+        </section>
+        <section>
+          <h2>Lab: Hands-on With OpenShift 3</h2>
+          <img style="height: 550px;" src="images/openshift_lab.png" />
+        </section>
+ 
+        <!--OPENSHIFT 3: How do I use it?//-->
+        <section>
+          <h2>Part 5: The OpenShift Experience</h2>
+          <img src="images/openshift_experience.png" />
+          <aside class="notes">
+            <p>The last thing we want to talk about today is the OpenShift experience. This brings us full circle, and
+            back to the promise of being able to use Docker and Containers to simplify your life.</p>
+          </aside>
+        </section>
+        <section>
+          <h2>Top Two Design Goals of OpenShift 3</h2>
+          <p>&nbsp;</p>
+          <ul>
+            <li>Maintain the "30-second <strong style="color: #F66;">Developer</strong> Experience"</li>
+            <li class="fragment">Bring on the "30-second <strong style="color: #F66;">Administrator</strong> Experience"</li>
+          </ul>
+          <table style="margin-left: auto; margin-right: auto;" class="fragment">
+            <tr>
+              <td style="padding: 0px;">
+                <img style="border: 0px;" src="images/shuttle_1.png" alt="Shuttle under construction" />
+              </td>
+              <td style="padding: 0px;">
+                <img style="border: 0px;" src="images/thirty_seconds.png" alt="Thirty seconds later..." />
+              </td>
+              <td style="padding: 0px;">
+                <img style="border: 0px;" src="images/shuttle_2.png" alt="Shuttle in space" />
+              </td>
+            </tr>
+          </table>
+          <aside class="notes">
+            <p>At the beginning of the day, Steve showed you that right now in OpenShift, you can create an app in thirty seconds from the command line.
+            OpenShift 3 <em>must work</em> just as well. And there are challenges there. Docker is inherently slower than the OpenShift 2 cartridge model.
+            But we're holding OpenShift to 30 seconds for the developer.</p>
+            <p>On top of that, we are presenting ourselves with a new challenge for OpenShift 3: the thirty second <em>administrator experience</em>.</p>
+            <p>Now, as the tech lead for OpenShift Origin, I can tell you that you've got two options to get going with the OpenShift 2 architecture.
+            First off, you <em>can</em> download a pre-built virtual machine, and you'll be up in thirty seconds, but you would be insane to use that
+            VM in a production environment. If you want a production system, you need to run the installer, which in turn configures and runs a puppet
+            module, and you've got a production ready system in 30 to 45 <em>minutes</em>.</p>
+            <p>So when one of our lead engineers said that we want a thirty second administrator experience, this is basically what he was proposing.</p>
+            <p>...I actually wrote the installer for OpenShift, and I didn't see how this would be possible. But that was three months ago. I was finishing
+            with the latest Origin release while the rest of the team had move on to the new system. In the weeks following this conference I will begin
+            laying the foundation for the new installer, and right now I think it's going to look something like this:</p>
+          </aside>
+        </section>
+        <section>
+          <h2>oo-install 3.0</h2>
+          <p>&nbsp;</p>
+          <ol>
+            <li class="fragment">You pick a server.</li>
+            <li class="fragment"><code>oo-install</code> checks for / installs / starts:</li>
+            <ul class="fragment">
+              <li>Docker</li>
+              <li>Kubernetes</li>
+            </ul>
+            <li class="fragment"><code>oo-install</code> runs<br /><code style="color: #F66;">kubecfg run openshift/openshift 1 openshift</code>
+            <li class="fragment">There is no step 4.</li>
+          </ol>
+          <p>&nbsp;</p>
+          <p class="fragment">But really 30 seconds?<br />Well, how fast is your net connection?</p>
+          <aside class="notes">
+            A Puppet module is certainly an option here. The current puppet module is about a hundred times more
+            complex than the new Puppet module will need to be.
+          </aside>
+        </section>
+        <section>
+          <h2>Built for Speed: Project Atomic</h2>
+          <p><a href="http://www.projectatomic.io/">www.projectatomic.io</a><br />&nbsp;</p>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td style="padding: 0px;">
+                <img style="border: 0px;" src="images/project_atomic.png" alt="Project Atomic logo" />
+              </td>
+              <td>&nbsp;</td>
+              <td style="vertical-align: middle;">
+                <ul>
+                  <li>Stripped-down base OS optimized for Docker<br />&nbsp;</li>
+                  <li>Uses <code>ostree</code> filesystems, which are <em>immutable</em> but not <em>stateless</em><br />&nbsp;</li>
+                  <li>Uses <code>cloud-init</code> hooks to load starting Docker images, set configuration details</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+          <aside class="notes">
+            <p>Project Atomic addresses the administrator experience on a different level. What if we could deploy and configure
+            super-stripped-down hosts that have just enough software to run Docker? And what if the entire platform-as-a-service
+            stack could be deployed from within Docker containers? Those are some of the questions that Project Atomic seeks to answer.</p>
+            <p>Atomic uses a technology called ostree to deploy a bootable filesystem as a single unit. And because it can manage filesystems
+            that way, you get some interesting side benefits, like the ability to perform whole filesystem rollbacks.</p>
+            <p>In the OpenShift context, we like that Atomic hosts can be configured with cloud-init at boot time. This opens the door for another
+            30-second administrator experience. On Atomic we can raise, update, and configure OpenShift controllers and minions in a single operation.</p>
+            <p>If you're interested in learning more, check out the website...</p>
+          </aside>
+        </section>
+        <section>
+          <h2>Other Admin Considerations</h2>
+          <p>&nbsp;</p>
+          <ul>
+            <li>Users, Teams and Projects</li>
+            <ul>
+              <li>A <code style="color: #F66;">project</code> controls access to a set of resources</li>
+              <li>Projects have hard and soft resource limits</li>
+              <li>Projects are based on organizational boundaries</li>
+            </ul>
+            <li>Quota and Usage</li>
+            <ul>
+              <li>Leverage Kubernetes to get fine-grained resource control</li>
+              <li>Performance policies can be specified along many dimensions</li>
+            </ul>
+          </ul>
+          <aside class="notes">
+            <p>Finally, within OpenShift itself, we are going to be introducing a few more features to simplify the administration process</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Simplify Life, Accelerate Development on AWS</h3>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td style="text-align: center; padding: 0px; margin: 0px;">
+                <img style="border: 0px; height: 562px; width: 214px;" src="images/eiffel_tower2a.png" />
+              </td>
+              <td style="text-align: center; padding: 0px; margin: 0px;" class="fragment">
+                <img style="border: 0px; height: 562px; width: 214px;" src="images/eiffel_tower2b.png" />
+              </td>
+              <td style="text-align: center; padding: 0px; margin: 0px; background-image: url('images/eiffel_tower2cc.png'); background-repeat: no-repeat; background-position: center center; background-size: 214px 562px;" class="fragment">
+                <img class="fragment" style="border: 0px; height: 562px; width: 214px;" src="images/eiffel_tower2c.png" />
+              </td>
+              <td style="text-align: center; padding: 0px; margin: 0px;" class="fragment">
+                <img style="border: 0px; height: 562px; width: 214px;" src="images/eiffel_tower2d.png" />
+              </td>
+            </tr>
+          </table>
+          <aside class="notes">
+            <p>It seems like a long time ago now, but this morning when we started, Steve promised you that we would be simplifying your life
+            and accelerating development with Docker and Kubernetes on AWS.</p>
+          </aside>
+        </section>
+        <section>
+          <h1>Questions?</h1>
+        </section>
+        <section>
+          <h1>Thank You!</h1>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>Learn More:</p>
+          <ul>
+            <li>Docker: <a href="https://docker.com/">docker.com</a></li>
+            <li>Kubernetes: <a href="https://github.com/GoogleCloudPlatform/kubernetes">github.com/GoogleCloudPlatform/kubernetes</a></li>
+            <li>OpenShift 3: <a href="https://github.com/openshift/origin">github.com/openshift/origin</a></li>
+          </ul>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>
+            <small>
+              Presented by<br />
+              <a href="http://about.me/n.harrison.ripps">N. Harrison Ripps</a> / <a href="http://twitter.com/nhripps">@nhripps</a><br />
+              <a href="https://twitter.com/TheSteve0">Steven Pousty</a> / <a href="http://twitter.com/TheSteve0">@TheSteve0</a>
+            </small>
+          </p>
+        </section>
