@@ -179,7 +179,7 @@ git push</code></pre>
           </aside>
         </section>
         <section>
-            <h2>Putting the PaaS in OpenStack</br> with Heat</h2>
+            <h2>Heat: Putting the PaaS in OpenStack</h2>
             <h3>Cross Community Collaboration<h3>
             <img style="border: 0px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/OpenStackHeatOpenShiftCircles.png" />
         </section>
@@ -210,16 +210,14 @@ git push</code></pre>
             <h2>Heat Overview</h2>
             <ul>
              <li>Provides AWS Cloudformation and native ReST API</li>
-             <li>Abstract configuration of services to single-template</li>
+             <li>Abstract configuration of services into a simple template</li>
              <li>HA/auto scaling/monitoring features</li>
-             <li>OpenStack integrated project</li>
             </ul>
             <img style="border: 0px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/OpenStackHeatOverview.png" />
         </section>
         <section>
             <h2>OpenShift Heat Templates on Github</h2>
-            <p><a href="https://github.com/openstack/heat-templates">https://github.com/openstack/heat-templates</a></p>
-            <img style="border: 0px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/OpenStackHeatTemplatesOnGitHub.png" />
+            <img style="border: 0px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/openshift_heat_templates.png" />
         </section>
         <section>
             <h2>Watch it at your leisure here on YouTube</h2>
@@ -270,17 +268,6 @@ git push</code></pre>
           </table>
         </section>
         <section>
-          <h2>Containers vs. VMs</h2>
-          <img style="height: 500px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/docker_vm_diagram.jpg" alt="Docker and VM comparison diagram" />
-        </section>
-        <section>
-          <h2>Containers vs. VMs</h2>
-          <img style="height: 500px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/docker_vs_kvm.png" alt="Docker and VM comparison diagram" />
-          <aside class="notes">
-            Article source: <a href="http://www.theregister.co.uk/2014/08/18/docker_kicks_kvms_butt_in_ibm_tests/">http://www.theregister.co.uk/2014/08/18/docker_kicks_kvms_butt_in_ibm_tests/</a>
-          </aside>
-        </section>
-        <section>
           <h2>Layers and UFS</h2>
           <img style="height: 500px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/docker_container.jpg" alt="Diagram of a multi-layered docker container" />
         </section>
@@ -291,7 +278,7 @@ git push</code></pre>
             <li>All presented as a single file system via <a href="http://aufs.sourceforge.net/">aufs</a></li>
             <li>Behavior is similar to using a LiveCD</li>
           </ul>
-          <p>&nbsp;<br />"Data Volume Container": A Docker container with only a read/write file system, either stricly within the container or linked to real storage on the host</p>
+          <p>&nbsp;<br />"Data Volume Container": A Docker container with only a read/write file system, either strictly within the container or linked to real storage on the host</p>
         </section>
         <section>
           <h2>Images: More like <code>git</code> than <code>tar</code></h2>
@@ -302,7 +289,6 @@ git push</code></pre>
           </ul>
         </section>
         <section data-markdown>
-          <script type="text/template">
             ## Pulling and Pushing Images
 
             Download docker images with the `pull` command:
@@ -325,8 +311,6 @@ git push</code></pre>
                 b1bd49907d55: Image already pushed, skipping 
                 589b2f903ada: Image successfully pushed 
                 Pushing tag for rev [589b2f903ada] on {https://cdn-registry-1.docker.io/v1/repositories/nhripps/centos/tags/wget}
-
-          </script>
         </section>
         <section>
           <h2>Versioning / Tagging</h2>
@@ -412,59 +396,6 @@ $ docker ps
 CONTAINER ID  IMAGE               COMMAND               PORTS                  NAMES
 1c2e06d8f85e  nhripps/nginx:base  "/bin/sh -c '/usr/sb  0.0.0.0:49153->80/tcp  loving_mclean</code></pre>
         </section>
-        <section>
-          <h2>Linking Containers</h2>
-          <table style="margin-left: auto; margin-right: auto;">
-            <tr>
-              <td><img style="background-color: #FFF;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/docker_links.png" alt="Docker links diagram" /></td>
-              <td style="vertical-align: middle;">
-                <ul>
-                  <li>Containers on the same host can be linked together</li>
-                  <li>Links between containers are not accessible outside the host</li>
-                  <li>Links are shared via ENV and /etc/hosts</li>
-                </ul>
-              </td>
-            </tr>
-          </table>
-        </section>
-        <section>
-          <h2>Linking Containers</h2>
-          <p>&nbsp;<br />Start a daemon container as normal, but without mapping any ports:</p>
-          <pre><code>$ docker run -d --name db training/postgres
-b4309b7dbbe1f43fd34720c96f496c3453c43ea735731b0888278aa26fe18f96</code></pre>
-          <p>&nbsp;<br />Now use the <code>--link</code> argument with a new container:</p>
-          <pre><code>$ docker run -d -P --name web --link db:db training/webapp python app.py
-18eeef892d63ea3cb5f1fb3cb61d359284c74b22775a2e72f5af4cca5b35ce59</code></pre>
-          <p>&nbsp;<br />See how the first container has been mapped to the second:</p>
-          <pre><code>$ docker ps
-CONTAINER ID  IMAGE                     COMMAND               PORTS                    NAMES
-18eeef892d63  training/webapp:latest    "python app.py"       0.0.0.0:49153->5000/tcp  web
-b4309b7dbbe1  training/postgres:latest  "su postgres -c '/us  5432/tcp                 db,web/db</code></pre>
-        </section>
-        <section>
-          <h2>Docker: Pros and Cons</h2>
-          <table style="margin-left: auto; margin-right: auto;">
-            <tr>
-              <td>
-                <p>PROS:</p>
-                <ul>
-                  <li>Extreme application portability</li>
-                  <li>Very easy to create and work with derivative images</li>
-                  <li>Fast boot on containers</li>
-                </ul>
-              </td>
-              <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-              <td>
-                <p>CONS:</p>
-                <ul>
-                  <li>Host-centric solution; not aware of anything else</li>
-                  <li>No higher-level provisioning</li>
-                  <li>No usage tracking / reporting</li>
-                </ul>
-              </td>
-            </tr>
-          </table>
-        </section>
         <!--KUBERNETES//-->
         <section id="intro-kubernetes">
           <h2>Intro to Kubernetes</h2>
@@ -480,7 +411,7 @@ b4309b7dbbe1  training/postgres:latest  "su postgres -c '/us  5432/tcp          
         <section>
           <h2>Kubernetes:</h2>
           <p>"Greek for 'pilot' or 'helmsman'."<br />&nbsp;</p>
-          <p class="fragment"><strong><span style="color: #F00;">Φ</span>ιλοσοφία <span style="color: #F00;">Β</span>ιοῦ <span style="color: #F00;">Κ</span>υβερνήτης</strong><br />Philosophia Biou Kubernetes: "Love of wisdom, the guide of life"</p>
+          <p class="fragment"><strong><span style="color: #F00;">Î¦</span>Î¹Î»Î¿ÏƒÎ¿Ï†Î¯Î± <span style="color: #F00;">Î’</span>Î¹Î¿á¿¦ <span style="color: #F00;">Îš</span>Ï…Î²ÎµÏÎ½Î®Ï„Î·Ï‚</strong><br />Philosophia Biou Kubernetes: "Love of wisdom, the guide of life"</p>
           <p class="fragment">&nbsp;<br /><a href="http://azure.microsoft.com/blog/2014/08/28/hackathon-with-kubernetes-on-azure/">"Declarative cluster management for Docker."</a></p>
           <div class="fragment">
             <img style="border: 0px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/confused.png" alt="I have no idea what that means." />
@@ -1017,75 +948,26 @@ b4309b7dbbe1  training/postgres:latest  "su postgres -c '/us  5432/tcp          
             back to the promise of being able to use Docker and Containers to simplify your life.</p>
           </aside>
         </section>
-
         <section>
-          <h2>oo-install 3.0</h2>
+          <h2>Heat Example</h2>
           <p>&nbsp;</p>
           <ol>
-            <li class="fragment">You pick a server.</li>
-            <li class="fragment"><code>oo-install</code> checks for / installs / starts:</li>
+            <li class="fragment">Download and customize your heat template</li>
+            <li class="fragment"><code>kube-heat tempate</code> will:</li>
             <ul class="fragment">
-              <li>Docker</li>
-              <li>Kubernetes</li>
-            </ul>
-            <li class="fragment"><code>oo-install</code> runs<br /><code style="color: #F66;">kubecfg run openshift/openshift 1 openshift</code>
-            <li class="fragment">There is no step 4.</li>
+              <li>kube-heat template deploys network, security, instances, etc..</li>
+              <li>Pull and customize <a href="http://github.com/danehans/openshift-v3-demo">v3 demo</a> project files.</li>
+              <li>Use kube to deploy OpenShift V3 pod.</li>
+              <li>Use <a href="https://github.com/openshift/origin/tree/master/examples">example templates</a> to deploy an app.</li>
           </ol>
-          <p>&nbsp;</p>
-          <p class="fragment">But really 30 seconds?<br />Well, how fast is your net connection?</p>
           <aside class="notes">
-            A Puppet module is certainly an option here. The current puppet module is about a hundred times more
-            complex than the new Puppet module will need to be.
+            These are general steps. The specifics are outlined in the demo.
           </aside>
         </section>
         <section>
-          <h2>Built for Speed: Project Atomic</h2>
-          <p><a href="http://www.projectatomic.io/">www.projectatomic.io</a><br />&nbsp;</p>
-          <table style="margin-left: auto; margin-right: auto;">
-            <tr>
-              <td style="padding: 0px;">
-                <img style="border: 0px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/project_atomic.png" alt="Project Atomic logo" />
-              </td>
-              <td>&nbsp;</td>
-              <td style="vertical-align: middle;">
-                <ul>
-                  <li>Stripped-down base OS optimized for Docker<br />&nbsp;</li>
-                  <li>Uses <code>ostree</code> filesystems, which are <em>immutable</em> but not <em>stateless</em><br />&nbsp;</li>
-                  <li>Uses <code>cloud-init</code> hooks to load starting Docker images, set configuration details</li>
-                </ul>
-              </td>
-            </tr>
-          </table>
-          <aside class="notes">
-            <p>Project Atomic addresses the administrator experience on a different level. What if we could deploy and configure
-            super-stripped-down hosts that have just enough software to run Docker? And what if the entire platform-as-a-service
-            stack could be deployed from within Docker containers? Those are some of the questions that Project Atomic seeks to answer.</p>
-            <p>Atomic uses a technology called ostree to deploy a bootable filesystem as a single unit. And because it can manage filesystems
-            that way, you get some interesting side benefits, like the ability to perform whole filesystem rollbacks.</p>
-            <p>In the OpenShift context, we like that Atomic hosts can be configured with cloud-init at boot time. This opens the door for another
-            30-second administrator experience. On Atomic we can raise, update, and configure OpenShift controllers and minions in a single operation.</p>
-            <p>If you're interested in learning more, check out the website...</p>
-          </aside>
-        </section>
-        <section>
-          <h2>Other Admin Considerations</h2>
+          <h2>Enough Talking, Let's See It</h2>
           <p>&nbsp;</p>
-          <ul>
-            <li>Users, Teams and Projects</li>
-            <ul>
-              <li>A <code style="color: #F66;">project</code> controls access to a set of resources</li>
-              <li>Projects have hard and soft resource limits</li>
-              <li>Projects are based on organizational boundaries</li>
-            </ul>
-            <li>Quota and Usage</li>
-            <ul>
-              <li>Leverage Kubernetes to get fine-grained resource control</li>
-              <li>Performance policies can be specified along many dimensions</li>
-            </ul>
-          </ul>
-          <aside class="notes">
-            <p>Finally, within OpenShift itself, we are going to be introducing a few more features to simplify the administration process</p>
-          </aside>
+          <video data-autoplay class="stretch" src="https://www.youtube.com/watch?v=FnpP6OI7Qpc"></video>
         </section>
         <section>
           <h3>Simplify Life, Accelerate Development on OpenStack</h3>
@@ -1097,8 +979,8 @@ b4309b7dbbe1  training/postgres:latest  "su postgres -c '/us  5432/tcp          
               <td style="text-align: center; padding: 0px; margin: 0px;" class="fragment">
                 <img style="border: 0px; height: 562px; width: 214px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/eiffel_tower2b.png" />
               </td>
-              <td style="text-align: center; padding: 0px; margin: 0px; background-image: url('images/eiffel_tower2cc.png'); background-repeat: no-repeat; background-position: center center; background-size: 214px 562px;" class="fragment">
-                <img class="fragment" style="border: 0px; height: 562px; width: 214px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/eiffel_tower2c.png" />
+              <td style="text-align: center; padding: 0px; margin: 0px;" class="fragment">
+                <img style="border: 0px; height: 562px; width: 214px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/eiffel_tower2cc.png" />              
               </td>
               <td style="text-align: center; padding: 0px; margin: 0px;" class="fragment">
                 <img style="border: 0px; height: 562px; width: 214px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/eiffel_tower2d.png" />
@@ -1129,7 +1011,7 @@ b4309b7dbbe1  training/postgres:latest  "su postgres -c '/us  5432/tcp          
             <small>
               Presented by<br />
               <a href="http://about.me/dianemueller">Diane Mueller, Red Hat OpenShift</a> / <a href="http://twitter.com/pythondj">@pythondj</a><br />
-              <a href="http://origin.openshift.com/users/cisco">Daneyon Hansen, Cisco</a> / <a href="https://twitter.com/daneyonhansen">@daneyonhansen</a>
+              <a href="http://about.me/daneyon_hansen">Daneyon Hansen, Cisco</a> / <a href="https://twitter.com/daneyonhansen">@daneyonhansen</a>
           </small>
           </p>
         </section>
