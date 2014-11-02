@@ -302,15 +302,15 @@ git push</code></pre>
 
             Publish images with the `push` command:
 
-                $ docker push nhripps/centos
-                The push refers to a repository [nhripps/centos] (len: 1)
+                $ docker push danehans/centos
+                The push refers to a repository [danehans/centos] (len: 1)
                 Sending image list
-                Pushing repository nhripps/centos (1 tags)
+                Pushing repository danehans/centos (1 tags)
                 511136ea3c5a: Image already pushed, skipping 
                 34e94e67e63a: Image already pushed, skipping 
                 b1bd49907d55: Image already pushed, skipping 
                 589b2f903ada: Image successfully pushed 
-                Pushing tag for rev [589b2f903ada] on {https://cdn-registry-1.docker.io/v1/repositories/nhripps/centos/tags/wget}
+                Pushing tag for rev [589b2f903ada] on {https://cdn-registry-1.docker.io/v1/repositories/danehans/centos/tags/wget}
         </section>
         <section>
           <h2>Versioning / Tagging</h2>
@@ -319,7 +319,7 @@ git push</code></pre>
 
           <pre><code>$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-nhripps/nodesrv     v1                  fe809d275af3        18 hours ago        864.9 MB
+danehans/nodesrv    v1                  fe809d275af3        18 hours ago        864.9 MB
 node                latest              32b8e915efd9        3 weeks ago         864.9 MB
 centos              centos6             b1bd49907d55        5 weeks ago         212.5 MB
 centos              centos7             b157b77b1a65        5 weeks ago         243.7 MB
@@ -327,23 +327,23 @@ centos              latest              b157b77b1a65        5 weeks ago         
 
           <p>Create the tag:</p>
 
-          <pre><code>$ docker tag fe809d275af3 nhripps/nodesrv:latest</code></pre>
+          <pre><code>$ docker tag fe809d275af3 danehans/nodesrv:latest</code></pre>
 
-          <pre><code>$ docker images nhripps/nodesrv
+          <pre><code>$ docker images danehans/nodesrv
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-nhripps/nodesrv     v1                  fe809d275af3        18 hours ago        864.9 MB
-nhripps/nodesrv     latest              fe809d275af3        18 hours ago        864.9 MB</code></pre>
+danehans/nodesrv    v1                  fe809d275af3        18 hours ago        864.9 MB
+danehans/nodesrv    latest              fe809d275af3        18 hours ago        864.9 MB</code></pre>
         </section>
         <section>
           <h2>Container Operations</h2>
           <p>Instantiate a Docker container with <code>docker run</code>:</p>
-          <pre><code>$ docker run -i -t nhripps/centos /bin/bash
+          <pre><code>$ docker run -i -t danehans/centos /bin/bash
 bash-4.1# exit
 exit</code></pre>
           <p>&nbsp;<br />List running and exited docker processes with <code>docker ps</code>:</p>
           <pre><code>$ docker ps -l
 CONTAINER ID  IMAGE                  COMMAND      CREATED         STATUS      NAMES
-7c4ef3596fa5  nhripps/centos:latest  "/bin/bash"  49 seconds ago  Exited (0)  grave_newton</code></pre>
+7c4ef3596fa5  danehans/centos:latest  "/bin/bash"  49 seconds ago  Exited (0)  grave_newton</code></pre>
           <p>&nbsp;<br />Rejoin containers with <code>docker attach</code>:</p>
           <pre><code>$ docker start grave_newton
 grave_newton
@@ -354,7 +354,7 @@ exit</code></pre>
         <section>
           <h2>"Diffing" a Container</h2>
           <p>Run a Docker image and perform some actions:</p>
-          <pre><code>$ docker run -i -t --name="add_wget" nhripps/centos /bin/bash
+          <pre><code>$ docker run -i -t --name="add_wget" danehans/centos /bin/bash
 bash-4.1# yum install -y wget
 ...
 bash-4.1# exit</code></pre>
@@ -384,17 +384,17 @@ A /usr/share/doc/wget-1.12
         <section>
           <h2>Docker Containers as Daemons</h2>
           <p>&nbsp;<br />Start a container as a detached process with <code>docker run -d</code>:</p>
-          <pre><code>$ docker run -d nhripps/nginx:base
+          <pre><code>$ docker run -d danehans/nginx:base
 1aa9f0bd1418f951a590c12ad717ea8af639dd29969ee3f59dfd87da1da23c4e
 $ docker ps
 CONTAINER ID  IMAGE               COMMAND               PORTS   NAMES
-1aa9f0bd1418  nhripps/nginx:base  "/bin/sh -c '/usr/sb  80/tcp  elegant_bell</code></pre>
+1aa9f0bd1418  danehans/nginx:base "/bin/sh -c '/usr/sb  80/tcp  elegant_bell</code></pre>
           <p>&nbsp;<br />Use the <code>-P</code> flag to automatically map container ports to the Docker host:</p>
-          <pre><code>$ docker run -d -P nhripps/nginx:base
+          <pre><code>$ docker run -d -P danehans/nginx:base
 1c2e06d8f85e6e034dfd1f7e822b32ed3f4ddf1d5760011d1e84a88a589f50f3
 $ docker ps
 CONTAINER ID  IMAGE               COMMAND               PORTS                  NAMES
-1c2e06d8f85e  nhripps/nginx:base  "/bin/sh -c '/usr/sb  0.0.0.0:49153->80/tcp  loving_mclean</code></pre>
+1c2e06d8f85e  danehans/nginx:base "/bin/sh -c '/usr/sb  0.0.0.0:49153->80/tcp  loving_mclean</code></pre>
         </section>
         <!--KUBERNETES//-->
         <section id="intro-kubernetes">
