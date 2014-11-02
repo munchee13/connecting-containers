@@ -409,27 +409,6 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
           </aside>
         </section>
         <section>
-          <h2>Kubernetes:</h2>
-          <p>"Greek for 'pilot' or 'helmsman'."<br />&nbsp;</p>
-          <p class="fragment"><strong><span style="color: #F00;">Î¦</span>Î¹Î»Î¿ÏƒÎ¿Ï†Î¯Î± <span style="color: #F00;">Î’</span>Î¹Î¿á¿¦ <span style="color: #F00;">Îš</span>Ï…Î²ÎµÏÎ½Î®Ï„Î·Ï‚</strong><br />Philosophia Biou Kubernetes: "Love of wisdom, the guide of life"</p>
-          <p class="fragment">&nbsp;<br /><a href="http://azure.microsoft.com/blog/2014/08/28/hackathon-with-kubernetes-on-azure/">"Declarative cluster management for Docker."</a></p>
-          <div class="fragment">
-            <img style="border: 0px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/confused.png" alt="I have no idea what that means." />
-          </div>
-          <aside class="notes">
-            <p>So I Googled "Kubernetes", figuring that would be helpful here. First,
-            I learned that Kubernetes is a Greek word meaning 'pilot' or 'helmsman'.
-            Okay, I sort of see where you're going...</p>
-            <p>Next stop was an article that sounded really official and it claimed
-            that Kubernetes was all about declarative cluster management. Oh! Well
-            why didn't you say so before? That explains everything! Um, or not?
-            I'm not even sure anymore...</p>
-            <p>So, since we've all just gotten our hands dirty with Docker, I'm going to
-            start explaining Kubernetes in terms of things that Docker <em>doesn't</em>
-            do.</p>
-          </aside>
-        </section>
-        <section>
           <h2>Docker Don'ts</h2>
           <ol>
             <li class="fragment">Docker doesn't see beyond a single host</li>
@@ -638,7 +617,7 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
       "id": "pulp_db",
       "containers": [{
         "name": "pulp-db",
-        "image": "markllama/mongodb",
+        "image": "danehans/mongodb",
         "ports": [{
           "containerPort": 27017,
         }]
