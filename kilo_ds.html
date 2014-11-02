@@ -655,7 +655,7 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
           <p>&nbsp;</p>
           <table style="margin-left: auto; margin-right: auto;">
             <tr>
-              <td style="width: 378px;"><img style="border: 0px; width: 373px; height: 241px;" src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/application.png" /></td>
+              <td style="width: 378px;"><img style="border: 0px; width: 373px; height: 241px;" src="https://github.com/danehans/gist-reveal-content/tree/master/openstack_kilo_summit/application.png" /></td>
               <td>&nbsp;</td>
               <td style="vertical-align: middle;">
                 <p><code style="color: #F66;">config</code>, <em style="color: #CCC;">n.</em><br />A collection of Kubernetes <em>and</em> OpenShift 3 objects that describes any combination of pods, services, replicationControllers, environment variables and OpenShift 3 objects that we'll discuss in a few slides.<br />&nbsp;</p>
@@ -804,6 +804,7 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
           </table>
         </section>
         <section>
+        <section>
           <h2>Application Lifecycle:</h2>
           <h3>Integrating with CI and CD through "triggers"</h3>
           <img src="https://raw.githubusercontent.com/danehans/gist-reveal-content/master/openstack_kilo_summit/app_lifecycle.png" />
@@ -921,21 +922,17 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
           <p>&nbsp;</p>
           <ol>
             <li class="fragment">Download and customize your heat template</li>
-            <li class="fragment"><code>kube-heat tempate</code> will:</li>
-            <ul class="fragment">
-              <li>kube-heat template deploys network, security, instances, etc..</li>
-              <li>Pull and customize <a href="http://github.com/danehans/openshift-v3-demo">v3 demo</a> project files.</li>
-              <li>Use kube to deploy OpenShift V3 pod.</li>
-              <li>Use <a href="https://github.com/openshift/origin/tree/master/examples">example templates</a> to deploy an app.</li>
+            <li class="fragment">The kube-heat tempate will deploy network, security, instances, etc..</li>
+            <li class="fragment">Pull and customize <a href="http://github.com/danehans/openshift-v3-demo">v3 demo</a> project files.</li>
+            <li class="fragment">Use kube to deploy OpenShift V3 pod.</li>
+            <li class="fragment">Use <a href="https://github.com/openshift/origin/tree/master/examples">example templates</a> to deploy an app.</li>
           </ol>
           <aside class="notes">
             These are general steps. The specifics are outlined in the demo.
           </aside>
         </section>
-        <section>
-          <h2>Enough Talking, Let's See It</h2>
-          <p>&nbsp;</p>
-          <video data-autoplay class="stretch" src="https://www.youtube.com/watch?v=FnpP6OI7Qpc"></video>
+        <section data-background-video="https://www.youtube.com/watch?v=FnpP6OI7Qpc" 
+              data-background-color="#000">
         </section>
         <section>
           <h3>Simplify Life, Accelerate Development on OpenStack</h3>
