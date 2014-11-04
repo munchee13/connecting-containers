@@ -1,16 +1,14 @@
         <section>
-          <h1>Deploying OpenShift on OpenStack</h1>
-          <h3>Using Heat, Docker and Kubernetes to Simplify Your Life and Accelerate Development</h3>
+          <h1>Deploying OpenShift on OpenStack</h1><br />
+          <h3>Using Heat, Docker and Kubernetes to Simplify Your Life and Accelerate Development</h3><br />
           <p>
-            <small>
               Presented by<br />
               <a href="http://about.me/dianemueller">Diane Mueller, Red Hat OpenShift</a> / <a href="http://twitter.com/pythondj">@pythondj</a><br />
               <a href="http://about.me/daneyon_hansen">Daneyon Hansen, Cisco</a> / <a href="https://twitter.com/daneyonhansen">@daneyonhansen</a>
-            </small>
           </p>
         </section>
         <section>
-        <h2>Today's Agenda'</h2>
+        <h2>Today's Agenda</h2>
         <table style="margin-left: auto; margin-right: auto;">
           <tr>
             <td>
@@ -26,10 +24,10 @@
             <td>&nbsp;</td>
             <td>
               <ul>
-                 <li><a href="#/intro-V3Heat">Deploying OpenShift V3</a></li>
-                <li><a href="#/intro-kubernetes">Kubernetes Overview</a></li>
                 <li><a href="#/intro-docker">Docker Overview</a></li>
+                <li><a href="#/intro-kubernetes">Kubernetes Overview</a></li>
                 <li><a href="#/intro-openshift-3">OpenShift 3 Overview</a></li>
+                 <li><a href="#/intro-heat">Deploying OpenShift V3 Demo</a></li>
                 <li>Links to all the Cool Stuff on GitHub and Docker Hub</li>
 
               </ul>
@@ -153,7 +151,9 @@
           <img style="border: 0px;" src="images/simplified_openshift_diagram.png" />
           <p>...and adds central management with easily scaled deployments</p>
         </section>
-        <section>
+
+        <!--HEAT//-->
+        <section id="intro-heat">
             <h2>Heat: Putting the PaaS in OpenStack</h2>
             <h3>Cross Community Collaboration<h3>
             <img style="border: 0px;" src="images/OpenStackHeatOpenShiftCircles.png" />
@@ -182,7 +182,7 @@
           <ul>
             <li>Live and <em>learn</em></li>
             <li>New tools</li>
-            <li>Sweet user experience + awesome technologies = Happy People</li>
+            <li>Sweet user experience + awesome technologies = Happiness</li>
           </ul>
           <aside class="notes">
             What Red Hat does is build on and foster the best open source technologies.  When OpenShift
@@ -214,10 +214,6 @@
               </td>
             </tr>
           </table>
-        </section>
-        <section>
-          <h2>Layers and UFS</h2>
-          <img style="height: 500px;" src="images/docker_container.jpg" alt="Diagram of a multi-layered docker container" />
         </section>
         <section>
           <h2>Images: More like <code>git</code> than <code>tar</code></h2>
@@ -286,12 +282,6 @@ exit</code></pre>
           <pre><code>$ docker ps -l
 CONTAINER ID  IMAGE                  COMMAND      CREATED         STATUS      NAMES
 7c4ef3596fa5  danehans/centos:latest  "/bin/bash"  49 seconds ago  Exited (0)  grave_newton</code></pre>
-          <p>&nbsp;<br />Rejoin containers with <code>docker attach</code>:</p>
-          <pre><code>$ docker start grave_newton
-grave_newton
-$ docker attach grave_newton
-bash-4.1# exit
-exit</code></pre>
         </section>
         <section>
           <h2>"Diffing" a Container</h2>
@@ -338,19 +328,6 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
             <li class="fragment">Speed</li>
           </ol>
         </section>
-
-        <!--KUBERNETES//-->
-        <section id="intro-kubernetes">
-          <h2>PaaS Component #2:</h2>
-            <h3>Kubernetes</h3>
-          <img src="images/kubernetes-ship4.png" alt="Docker.io Logo" />
-          <aside class="notes">
-            What is Kubernetes? When I made this slide I had only a vague concept of what
-            Google's Kubernetes project was about, but I knew it was doing something at
-            a higher level than Docker. As of yet there are no cool logos for Kubernetes,
-            so I am going to make some proposals as we go through.
-          </aside>
-        </section>
         <section>
           <h2>Docker Doesn't</h2>
           <ol>
@@ -370,6 +347,19 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
             it left a big opening for technologies to come along and solve. Solution? Kubernetes.</p>
           </aside>
         </section>
+
+        <!--KUBERNETES//-->
+        <section id="intro-kubernetes">
+          <h2>PaaS Component #2:</h2>
+            <h3>Kubernetes</h3>
+          <img src="images/kubernetes-ship4.png" alt="Docker.io Logo" />
+          <aside class="notes">
+            What is Kubernetes? When I made this slide I had only a vague concept of what
+            Google's Kubernetes project was about, but I knew it was doing something at
+            a higher level than Docker. As of yet there are no cool logos for Kubernetes,
+            so I am going to make some proposals as we go through.
+          </aside>
+        </section>
         <section>
           <h2>Kuberenetes Terminology</h2>
           <table style="margin-left: auto; margin-right: auto;">
@@ -378,12 +368,14 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
               <td>&nbsp;</td>
               <td style="vertical-align: middle;">
                 <dl>
-                  <dt>Minion:</dt>
-                  <dd>A Docker host running the <em>kubelet</em> and the <em>proxy</em> service.<br />&nbsp;</dd>
                   <dt>Pod:</dt>
-                    <dd>One or more inter-related (linked) Docker containers.<br />&nbsp;</dd>
-                  <dt>Cluster:</dt>
-                    <dd>A collection of one or more Minions.</dd>
+                    <dd>One or more inter-related Docker containers.<br />&nbsp;</dd>
+                  <dt>Label:</dt>
+                    <dd>Used with pods to specify identifying metadata.<br />&nbsp;</dd>
+                  <dt>Master:</dt>
+                    <dd>Runs cluster-level control plane services.<br />&nbsp;</dd>
+                  <dt>Minion/Node:</dt>
+                    <dd>A Docker host running the <em>kubelet</em> and the <em>proxy</em> service.<br />&nbsp;</dd>
                 </dl>
               </td>
             </tr>
@@ -429,14 +421,12 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
           </aside>
         </section>
         <section>
-        <section>
           <h2>Minion Daemon:<br /><code>kube-proxy</code></h2>
           <img style="border: 0px; height: 200px;" src="images/kubernetes_proxy.png" alt="The proxy maps a single port on the minion to all relevant pods" />
           <p>&nbsp;</p>
           <ul>
             <li>The proxy service maps a common port <em>on every minion</em> to relevant pods <em>across the entire cluster</em><br />&nbsp;</li>
             <li>Relevant pods are chosen by comparing a <em>label</em> on the proxy definition to labels on the running pods<br />&nbsp;</li>
-            <li>This mapping of a minion host port to a pod label is called a <strong>service</strong></li>
           </ul>
           <aside class="notes">
             <p>The interesting thing about the service proxy is that every minion gets all of the
@@ -461,12 +451,12 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
               <td style="vertical-align: middle;">
                 <dl>
                   <dt>Kubernetes API</dt>
-                  <dd>RESTful web API for Kubernetes<br />&nbsp;</dd>
+                  <dd>RESTful API for Kubernetes<br />&nbsp;</dd>
                   <dt>Scheduler</dt>
-                  <dd>One job: choose minions for pods<br />&nbsp;</dd>
+                  <dd>Choose minions for pods<br />&nbsp;</dd>
                   <dt>Controller Manager</dt>
                   <dd>Monitoring service for deployed pods<br />&nbsp;</dd>
-                  <dt><code>kubecfg</code></dt>
+                  <dt>kubecfg</dt>
                     <dd>CLI for working with a Kubernetes cluster</dd>
                 </dl>
               </td>
@@ -481,73 +471,21 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
           </aside>
         </section>
         <section>
-          <h2>The Kubernetes API</h2>
+          <h2>Kubernetes Doesn't</h2>
+          <p>&nbsp;</p>
           <ul>
-            <li>Minions (docker hosts)</li>
-            <li>Pods (docker container configurations)</li>
-            <li>Services (port proxy mappings)</li>
-            <li><em>Replication Controllers</em> (replicated, monitored pod deployments)</li>
+            <li class="fragment">Have a concept of a complete <em>application</em>.</li>
+            <li class="fragment">Have capacity for building and deploying Docker images from source code.</li>
+            <li class="fragment">Have a focus on a user or admin <em>experience</em>.</li>
           </ul>
-          <img src="images/kubersnoopy.png" alt="Kubernetes logo concept #3" />
-          <p><small>(Logo concept #3)</small></p>
-          <aside class="notes">
-            <p>By now we've already covered most of the things that are available through the API.
-            However, there's one last piece to talk about, and that is something called a Replication
-            Controller.</p>
-            <p>Pods and minions are really just convenient ways of managing docker hosts and containers.
-            Service and Replication Controllers bring us that cluster management thinking that really
-            defines Kubernetes.</p>
-          </aside>
-        </section>
-        <section>
-          <h2><code>controller-manager</code><br />and Replication Controllers</h2>
-          <table style="margin-left: auto; margin-right: auto;">
-            <tr>
-              <td><img src="images/controller_manager.png" alt="You tell controller-manager what you need, and it does the rest." /></td>
-              <td>&nbsp;</td>
-              <td style="vertical-align: middle;">
-                <ul>
-                  <li>You tell it what you need, it decides which minions to deploy on</li>
-                  <li>Constant monitoring; starts and stops pods as necessary to match the count</li>
-                  <li>Decoupled from service proxying</li>
-                </ul>
-              </td>
-            </tr>
-          </table>
-        </section>
-        <section>
-          <h2><code>kubecfg</code></h2>
-          <p>Set up and manage replication controllers</p>
-          <pre><code>kubecfg -p 8080:80 run dockerfile/nginx 2 myNginxController</code></pre>
-          <p>&nbsp;<br />Perform CRUD operations against the RESTful Kubernetes API</p>
-          <pre><code>kubecfg <-c some/body.[json|yaml]> [options] update pods/pod-abc-123</code></pre>
-          <p>&nbsp;<br />Requires JSON or YAML configured input for CRUD operations</p>
-          <pre><code>{
-  "id": "pulpdb",
-  "kind": "Pod",
-  "apiVersion": "v1beta1",
-  "labels": {
-    "name": "db"
-  },
-  "desiredState": {
-    "manifest": {
-      "version": "v1beta1",
-      "id": "pulp_db",
-      "containers": [{
-        "name": "pulp-db",
-        "image": "markllama/mongodb",
-        "ports": [{
-          "containerPort": 27017,
-        }]
-      }]
-    }
-  }
-}</code></pre>
+          <div class="fragment">
+            <img style="height: 300px;" src="images/keep-calm-and-code-on.png" />
+          </div>
         </section>
 
         <!--OPENSHIFT 3: How is it built?//-->
         <section id="intro-openshift-3">
-          <h2>Part 4:</h2>
+          <h2>Bringing it All Together:</h2>
           <img style="height: 500px; background-color: #FFF;" src="images/openshift_logo.png" alt="OpenShift Logo" />
           <aside class="notes">
             <p>So far today, we've introduced Docker for running containerized applications, and we've
@@ -556,19 +494,6 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
             describing Kubernetes in terms of what Docker is missing, let's start talking about the new
             OpenShift architecture in terms of what Kubernetes is missing... aside from a logo, of course.</p>
           </aside>
-        </section>
-        <section>
-          <h2>Kubernetes Don'ts</h2>
-          <p>&nbsp;</p>
-          <ul>
-            <li class="fragment">No concept of a complete <em>application</em>.</li>
-            <li class="fragment">No capacity for building and deploying Docker images from source code.</li>
-            <li class="fragment">No <em>lifecycle</em> (CI / staging / production).</li>
-            <li class="fragment">No inherent focus on a user or administrator <em>experience</em>.</li>
-          </ul>
-          <div class="fragment">
-            <img style="height: 300px;" src="images/keep-calm-and-code-on.png" />
-          </div>
         </section>
         <section>
           <h2>Applications =<br />Distinct Interconnected Services</h2>
@@ -590,7 +515,7 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
               <td style="width: 378px;"><img style="border: 0px; width: 373px; height: 241px;" src="images/applications.png" /></td>
               <td>&nbsp;</td>
               <td style="vertical-align: middle;">
-                <p><code style="color: #F66;">config</code>, <em style="color: #CCC;">n.</em><br />A collection of Kubernetes <em>and</em> OpenShift 3 objects that describes any combination of pods, services, replicationControllers, environment variables and OpenShift 3 objects that we'll discuss in a few slides.<br />&nbsp;</p>
+                <p><code style="color: #F66;">config</code>, <em style="color: #CCC;">n.</em><br />A collection of objects describing a combination of pods, services, replicationControllers, environment variables.<br />&nbsp;</p>
                 <p><code style="color: #F66;">template</code>, <em style="color: #CCC;">n.</em><br />A <em>parameterized</em> version of a config for generalized re-use.</p>
               </td>
             </tr>
@@ -626,8 +551,8 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
 
             <p>&nbsp;</p>
 
-            * **parameters**: Variables that can be set at the application level and used across Kubernetes objects
-            * **items**: One or more Kubernetes or OpenShift 3 object definitions that you wish to specify, **including another `config`**
+            * **Parameters**: Variables that can be set at the application level and used across objects
+            * **Items**: One or more object definitions that you wish to specify
 
             <aside class="notes">Would we ever <em>want</em> to include a config template inside of another config template? I'm sure we could think of some cases. However, an OpenShift 3 system will include a set of curated templates that look a lot like the cartridges and quickstarts that we have today.</aside>
           </script>
@@ -666,61 +591,7 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
           </script>
         </section>
         <section>
-          <h2>Building Applications from Source</h2>
-          <p>Three challenges to consider:</p>
-          <img style="border: 0px;" src="images/assembly_line.png" />
-          <ul>
-            <li>Getting at the source code? <span class="fragment"><strong style="color: #F66;">GitHub (and others)</strong></span></li>
-            <li>Driving new builds when the source code changes? <span class="fragment"><strong style="color: #F66;">Webhooks</strong></span></li>
-            <li>Building new Docker images based on the source code? <span class="fragment"><strong style="color: #F66;">...hm.</strong></span></li>
-          </ul>
-        </section>
-        <section>
-          <h2>Build Option #1:<br /><code>docker-builder</code></h2>
-          <p>&nbsp;</p>
-          <ol>
-            <li class="fragment">A docker image that quietly co-opts the host docker's socket</li>
-            <li class="fragment">Pulls down new/updated source code from a Git URL</li>
-            <li class="fragment">Per the app Dockerfile, pulls down base engine images (like ruby, node, golang, etc.) into the host Docker repository</li>
-            <li class="fragment">Uses <code>docker build</code> to load and compile the source on top of the base image</li>
-            <li class="fragment">Pushes the resulting image into a <em>private</em>, <em>hosted</em> Docker registry somewhere in the cluster</li>
-            <li class="fragment">Quietly fades away into darkness like it was never there.</li>
-          </ol>
-          <aside class="notes">
-            When my fellow engineers on the OpenShift team explained how this worked to me, my mind basically exploded.
-          </aside>
-        </section>
-        <section>
-          <img style="border: 0px; height: 600px;" src="images/dockerception.png" />
-        </section>
-        <section>
-          <h2>Build Option #2:<br />Source-to-Image (<code>sti</code>)</h2>
-          <p>&nbsp;</p>
-          <table style="margin-left: auto; margin-right: auto;">
-            <tr>
-              <td><img style="border: 0px; height: 400px;" src="images/ship_blueprint.png" /></td>
-              <td>&nbsp;</td>
-              <td style="vertical-align: middle;">
-                <ul>
-                  <li>Relies on specially-built STI Docker images</li>
-                  <li>Behavior reminiscent of OpenShift 2 cartridges</li>
-                  <li>Invocation reminiscent of <code>kubecfg run</code>:<br /><pre><code>sti build &lt;src&gt; &lt;image&gt; &lt;tag&gt;</code></pre></li>
-                  <ul>
-                    <li><code>src</code>: Source code URI</li>
-                    <li><code>image</code>: The STI builder image to use</li>
-                    <li><code>tag</code>: The tag for the resulting Docker app image</li>
-                  </ul>
-                </ul>
-              </td>
-            </tr>
-          </table>
-          <aside class="notes">
-            <p>The problem with docker-builder is that it depends on a Dockerfile in order to run. However, OpenShift doesn't like lock-in. When your code includes a Dockerfile, it starts to always look like a Docker image. So the alternative to explicitly using Dockerfiles is a build path called Source-to-Image.</p>
-            <p>The purpose-built STI docker images contain a base image along with <em>assemble</em> and <em>run</em> scripts that tell the running container how to process the source code that is passed in. This is functionally equivalent to what a Dockerfile can do, but developers don't have to think in terms of Dockerfiles to use it.</p>
-          </aside>
-        </section>
-        <section>
-          <h2>Builds in OpenShift 3</h2>
+          <h2>Builds in OpenShift v3</h2>
           <p>&nbsp;</p>
           <table style="margin-left: auto; margin-right: auto;">
             <tr>
@@ -757,8 +628,8 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
           </aside>
         </section>
         <section>
-          <h3>Lifecycle in OpenShift 3:</h3>
-          <h2>The Deployment</h2>
+          <h2>Lifecycle in OpenShift 3:</h2>
+          <h2>The Deployment</h3>
           <img style="border: 0px;" src="images/skydiving.png" />
           <table style="margin-left: auto; margin-right: auto;">
             <tr>
@@ -797,19 +668,6 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
             <p>Image change: OpenShift 3 watches the state of images in the cluster's private Docker repo. When an image is updated, redeployment is triggered.</p>
             <p>config change: If I change the definition of my config file, redeploy the pieces covered in the deployment configuration.</p>
           </aside>
-        </section>
-        <section>
-          <h2>Deployment Strategies</h2>
-          <ul>
-            <li>Not <em>how</em> to handle deployments, but <em>who</em> to handle deployments</li>
-            <li>Currently supported: "customPod" (i.e. "hand the task off to a customPod of a specific name.")
-            <li class="fragment">Theoretical alternatives:</li>
-            <ul>
-              <li class="fragment"><em>thirdPartyDeployment</em> - job goes to a separate system</li>
-              <li class="fragment"><em>controllerService</em> - job goes to a service in the deployment controller</li>
-              <li class="fragment"><em>conciergeService</em> - Standish be a good fellow and handle this, eh?<br /><img style="border: 0px;" src="images/concierge_service.jpg" /></li>
-            </ul>
-          </ul>
         </section>
         <section>
           <h2>New Concepts Summary</h2>
@@ -856,10 +714,8 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
           <p>&nbsp;</p>
           <p>&nbsp;</p>
           <p>
-            <small>
               Presented by<br />
               <a href="http://about.me/dianemueller">Diane Mueller, Red Hat OpenShift</a> / <a href="http://twitter.com/pythondj">@pythondj</a><br />
               <a href="http://about.me/daneyon_hansen">Daneyon Hansen, Cisco</a> / <a href="https://twitter.com/daneyonhansen">@daneyonhansen</a>
-            </small>
           </p>
         </section>
