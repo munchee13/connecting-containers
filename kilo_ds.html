@@ -232,7 +232,6 @@
           </ul>
         </section>
         <section data-markdown>
-          <script type="text/template">
             ## Pulling and Pushing Images
 
             Download docker images with the `pull` command:
@@ -256,7 +255,6 @@
                 589b2f903ada: Image successfully pushed 
                 Pushing tag for rev [589b2f903ada] on {https://cdn-registry-1.docker.io/v1/repositories/danehans/centos/tags/wget}
 
-          </script>
         </section>
         <section>
           <h2>Versioning / Tagging</h2>
@@ -509,8 +507,8 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
           <h2>Applications =<br />Distinct Interconnected Services</h2>
           <img style="border: 0px; height: 300px;" src="https://raw.githubusercontent.com/danehans/v3_presentation/gh-pages/images/interconnected.jpg" />
           <ul>
-            <li><strong style="color: #F66;">Distinct</strong>: App components must be abstracted so that they can evolve independently</li>
-            <li><strong style="color: #F66;">Interconnected</strong>: Every component should be easy to build, manage and deploy in concert</li>
+            <li><span style="color: #F66; font-weight:bold;">Distinct</span>: App components must be abstracted so that they can evolve independently</li>
+            <li><span style="color: #F66;font-weight:bold;">Interconnected</span>: Every component should be easy to build, manage and deploy in concert</li>
           </ul>
           <aside class="notes">
             <p>So now we're thinking about applications differently. Pieces aren't just modular; they're actually completely distinct components
@@ -535,40 +533,34 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
             do they actually look like in a Kubernetes and Docker based system?</p>
           </aside>
         </section>
-        <section data-markdown>
-          <script type="text/template">
-            ## The config Template</h2>
-
-            <p>&nbsp;</p>
-
-                {
-                  "id": "ruby-helloworld-sample-template",
-                  "kind": "Template",
-                  "name": "ruby-hello-world-template",
-                  "parameters": [{
-                      "name": "ADMIN_USERNAME",
-                      "description": "Administrator username",
-                      "type": "string",
-                      "expression": "admin[A-Z0-9]{3}"
-                  }],
-                  "items": [{
-                      "id": "frontend",
-                      "kind": "Service",
-                      "port": 5432,
-                      "selector": { "name": "frontend" }
-                  }]
-                }
-
-            <p>&nbsp;</p>
-
-            * **Parameters**: Variables that can be set at the application level and used across objects
-            * **Items**: One or more object definitions that you wish to specify
-
+        <section>
+            <h2>The config Template</h2>
+            <br/>
+            <pre><code contenteditable>{
+  "id": "ruby-helloworld-sample-template",
+  "kind": "Template",
+  "name": "ruby-hello-world-template",
+  "parameters": [{
+    "name": "ADMIN_USERNAME",
+    "description": "Administrator username",
+    "type": "string",
+    "expression": "admin[A-Z0-9]{3}"
+  }],
+  "items": [{
+    "id": "frontend",
+    "kind": "Service",
+    "port": 5432,
+    "selector": { "name": "frontend" }
+  }]
+}</code></pre>
+            <br/>
+            <ul>
+              <li><b>Parameters</b>: Variables that can be set at the application level and used across objects</li>
+              <li><b>Items</b>: One or more object definitions that you wish to specify<li>
+            </ul>
             <aside class="notes">Would we ever <em>want</em> to include a config template inside of another config template? I'm sure we could think of some cases. However, an OpenShift 3 system will include a set of curated templates that look a lot like the cartridges and quickstarts that we have today.</aside>
-          </script>
         </section>
         <section data-markdown>
-          <script type="text/template">
             ## Parameters
 
             Defined (in the `template`):
@@ -598,7 +590,6 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
 
             * Can be hard-coded, generated, or a mix of both.
             * Can be used in any of the `item` configurations in a `config`.
-          </script>
         </section>
         <section>
           <h2>Builds in OpenShift v3</h2>
@@ -639,7 +630,7 @@ CONTAINER ID  IMAGE               COMMAND               PORTS                  N
         </section>
         <section>
           <h2>Lifecycle in OpenShift 3:</h2>
-          <h2>The Deployment</h3>
+          <h2>The Deployment</h2>
           <img style="border: 0px;" src="https://raw.githubusercontent.com/danehans/v3_presentation/gh-pages/images/skydiving.png" />
           <table style="margin-left: auto; margin-right: auto;">
             <tr>
