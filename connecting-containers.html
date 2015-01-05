@@ -40,17 +40,140 @@
 <section>
     <section>
         <h2>What is Atomic?</h2>
+        <img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/AtomicIcon.png" height="320"/>
     </section>
     <section>
+    	<h2>New infrastructure and learning</h2>
+    	<h3 class="fragment">Virtualization and then Cloud</h3>
+    	<h3 class="fragment">A lot of experience with Linux</h3>
     </section>
+    <section>
+    	<h2>RPM-OSTree</h2>
+    	<h4>A system to compose RPMs on a server side into an OSTree repository</h4>
+    </section>
+    <section>
+    	<h2>Minimal System</h2>
+    	<h3 class="fragment">Best supported kernel in the world</h3> 
+    	<h3 class="fragment">All the System Utilities you need and nothing else </h3>
+    </section>
+    <section>
+    	<h2>Containers 1st class citizens</h2>
+    	<h3 class=fragment>Made for running containers</h3>
+    	<h3 class=fragment>Includes <a href="http://cockpit-project.org/">a console for management </a></h3>
+    </section>    
 </section>
 <!-- Docker Overview -->
 <section>
     <section>
         <h2>What is Docker?</h2>
+        <<img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/docker-logo.png" height="410"/>
     </section>
     <section>
+    	<h2>What is a Container?</h2>
+          <table>
+            <tr>
+              <td><img style="height: 300px;" src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/docker_container.jpg" alt="Diagram of a multi-layered docker container" /></td>
+              <td style="vertical-align: middle;">
+                <ul>
+                  <li>In Docker parlance, a <em>container</em> is a running instance of an <em>image</em></li>
+                  <li>Based on linux containers (namepaces, control groups)</li>
+                  <li>Combines file system <em>layers</em> into a "Union File System"</li>
+                  <li>Includes all of the components necessary to run a process, store persistent data, or both</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
     </section>
+    <section>
+          <h2>Containers vs. VMs</h2>
+          <img style="height: 500px;" src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/docker_vm_diagram.jpg" alt="Docker and VM comparison diagram" />
+	</section>
+	 <section>
+          <h2>Container Operations</h2>
+          <p>Instantiate a Docker container with <code>docker run</code>:</p>
+          <pre><code>$ docker run -i -t nhripps/centos /bin/bash
+bash-4.1# exit
+exit</code></pre>
+          <p>&nbsp;<br />List running and exited docker processes with <code>docker ps</code>:</p>
+          <pre><code>$ docker ps -l
+CONTAINER ID  IMAGE                  COMMAND      CREATED         STATUS      NAMES
+7c4ef3596fa5  nhripps/centos:latest  "/bin/bash"  49 seconds ago  Exited (0)  grave_newton</code></pre>
+          <p>&nbsp;<br />Rejoin containers with <code>docker attach</code>:</p>
+          <pre><code>$ docker start grave_newton
+grave_newton
+$ docker attach grave_newton
+bash-4.1# exit
+exit</code></pre>
+        </section>
+        <section>
+          <h2>"Diffing" a Container</h2>
+          <p>Run a Docker image and perform some actions:</p>
+          <pre><code>$ docker run -i -t --name="add_wget" nhripps/centos /bin/bash
+bash-4.1# yum install -y wget
+...
+bash-4.1# exit</code></pre>
+          <p>Run a diff on the container after it has run:</p>
+          <pre><code>$ docker diff add_wget
+C /.bash_history
+C /etc
+A /etc/wgetrc
+C /tmp
+C /usr
+C /usr/bin
+A /usr/bin/wget
+C /usr/share
+C /usr/share/doc
+A /usr/share/doc/wget-1.12
+...</code></pre>
+    </section>
+    <section>
+      <h2>Docker Containers as Daemons</h2>
+      <img style="height: 400px;" src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/docker_bunny.png" alt="Docker Containers Just Keep Going..." />
+      <p>A docker container runs until:</p>
+      <ul>
+        <li>The process inside it exits <em>or</em></li>
+        <li>You stop it with <code>docker stop &lt;container_name&gt;</code></li>
+      </ul>
+    </section>
+    <section>
+          <h2>Linking Containers</h2>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td><img style="background-color: #FFF;" src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/docker_links.png" alt="Docker links diagram" /></td>
+              <td style="vertical-align: middle;">
+                <ul>
+                  <li>Containers on the same host can be linked together</li>
+                  <li>Links between containers are not accessible outside the host</li>
+                  <li>Links are shared via ENV and /etc/hosts</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+    </section>
+    <section>
+          <h2>Docker: Pros and Cons</h2>
+          <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td>
+                <p>PROS:</p>
+                <ul>
+                  <li>Extreme application portability</li>
+                  <li>Very easy to create and work with derivative images</li>
+                  <li>Fast boot on containers</li>
+                </ul>
+              </td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td>
+                <p>CONS:</p>
+                <ul>
+                  <li>Host-centric solution; not aware of anything else</li>
+                  <li>No higher-level provisioning</li>
+                  <li>No usage tracking / reporting</li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </section>
 </section>
 <!-- Kubernetes Overview -->
 <section>
