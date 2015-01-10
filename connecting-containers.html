@@ -240,23 +240,45 @@ A /usr/share/doc/wget-1.12
         <img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/originpanda.png" style="width: 600px;  padding-top: 20px; background: white;"/>
     </section>
     <section>
+        <h2>Design Goal</h2>
+        <h3>Kubernetes provides a container runtime</h3>
+        <h3>OpenShift provides the DevOps and team environment</h3>
     </section>
     <section>
+        <h2>Concepts</h2>
+        <div>
+            <ul style="list-style-type: none;">
+                <li class="fragment" style="padding-bottom: 5px"><strong>application: </strong>one or more pods linked together by services; distinct, interconnected components</li>
+                <li class="fragment" style="padding-bottom: 5px"><strong>config: </strong>collection of objects describing combination of pods, services, replication controllers, environment variables, and other components</li>
+                <li class="fragment" style="padding-bottom: 5px"><strong>template: </strong>parameterised version of config for generalised reuse</li>
+                <li class="fragment" style="padding-bottom: 5px"><strong>build config: </strong>object defining source code URI, authentication for change notifications (webhooks), and build type (<em>source-to-image</em> or <em>docker-builder</em>)</li>
+                <li class="fragment"><strong>deployment: </strong>image and settings for it: replication controller (desired running state), trigger policies, and deployment strategy</li>
+            </ul>
+        </div>
     </section>
     <section>
+        <img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/openshiftallinone.png" style="width: 700px;"/>
     </section>
     <section>
-    </section>
-    <section>
-    </section>
-    <section>
-    </section>
-    <section>
+        <h2>Features</h2>
+         <ul style="list-style-type: square;">
+            <li class="fragment" style="padding-bottom: 10px">Ability to build, manage, and deliver application descriptions at scale</li>
+            <li class="fragment" style="padding-bottom: 10px">Turning source code into new deployable components</li>
+            <li class="fragment">Support for common workflows, the application lifecycle, and teams
+                <ul style="list-style-type: circle;">
+                    <li>Integration of CI/CD flows into Kubernetes; </br>trigger builds manually or from code, app, or image changes</li>
+                    <li>Support for projects and multi-user usage and tracking; </br>default network isolation based on team access control</li>
+                </ul>
+            </li>
+        </ul>
     </section>
     <section>
         <h2>Wins</h2>
-        <h3 class="fragment"></h3>
-        <div class="fragment" style="margin-top: 20px;"></div>
+        <div class="fragment">Build a single artifact containing the dependency chain for reproducible deployments</div>
+        <div class="fragment" style="margin-top: 20px;">Share common technology stacks and common patterns for rolling out changes, with everything templated</div>
+        <div class="fragment" style="margin-top: 20px;">Manage thousands of applications with teams, auto-scaling components independently and updating them en masse when required</div>
+        <div class="fragment" style="margin-top: 20px;">Easily provision new resources at scale and subdivide them for teams</div>
+        <div class="fragment" style="margin-top: 20px;">Platform aware of and able to respond to changes, for a fault-tolerant, automated, and repeatable build and deployment process</div>
     </section>
 </section>
 <!-- Demo -->
