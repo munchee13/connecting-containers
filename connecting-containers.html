@@ -16,9 +16,9 @@
         <h2>Deployment Styles</h2>
         <div>
             <ul>
-                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">Wait and See: </span> <span class="fragment">request server </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait some more </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request deployment </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> while (environment issues) { wait; reattempt deployment } </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in production</span></li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">Wait and See: </span> <span class="fragment">request server </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait some more </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request deployment </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> while (environment issues) { reattempt deployment; wait } </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in production</span></li>
                 <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">Resource Loop: </span><span class="fragment">request server </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request deployment </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in production </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> app fails under load </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request server...</span></li>
-                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">Procure Cure: </span><span class="fragment">attempt to navigate IT Service Desk software </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> fail </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> acquire server on the sly </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in "production" </span></li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">Procure Cure: </span><span class="fragment">attempt to navigate IT Service Desk software </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> fail </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> acquire server on the sly </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in&nbsp;"production" </span></li>
                 <li class="fragment"><span style="color: rgb(190, 100, 50); font-weight: bold;">Friends in High Places: </span><span class="fragment">communication breakdown with Ops </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> call in Chuck Norris </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> Norris whispers "you better run" </span><span class="fragment"> <span style="color: rgb(190, 100, 50)">>></span> the app runs</span></li>
             </ul>
          </div>
@@ -27,9 +27,9 @@
         <h2>Aims</h2>
         <ul style="list-style-type: square;">
             <li class="fragment">Freedom to choose best tool/tech for the job, without config headaches</li>
-            <li class="fragment">Fast, easy, reproducible deployments, that can be made up of small components we wire together (a la microservices)</li>
+            <li class="fragment">Fast, easy, reproducible deployments, that can be made up of small components wired together (&agrave; la microservices)</li>
             <li class="fragment">Ability to scale pieces of a solution independently, to meet changing demand</li>
-            <li class="fragment">End battles between Dev Ops; automated deployment pipeline; CI/CD</li>
+            <li class="fragment">End battles between Dev and Ops; automated deployment pipeline; CI/CD</li>
             <li class="fragment">Efficient resource usage</li>
             <li class="fragment">Secure production code; ability to respond quickly to issues</li>
         </ul>
@@ -39,7 +39,7 @@
 <section>
     <section>
         <h2>Platform as a Service</h2>
-        <img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/cowsplatform.jpg" style="width: 500px;"/>
+        <img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/cowsplatform.jpg" style="width: 600px;"/>
     </section>
     <section>
         <img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/paas.png" style="height: 600px; padding: 20px; background-color: rgba(255, 255, 255, 0.25);" />
@@ -268,11 +268,11 @@ A /usr/share/doc/wget-1.12
         <h2>Concepts</h2>
         <div>
             <ul style="list-style-type: none;">
-                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50)">application: </span>one or more pods linked together by services; distinct, interconnected components</li>
-                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50)">config: </span>collection of objects describing combination of pods, services, replication controllers, environment variables, and other components</li>
-                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50)">template: </span>parameterised version of config for generalised reuse</li>
-                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50)">build config: </span>object defining source code URI, authentication for change notifications (webhooks), and build type (<em>source-to-image</em> or <em>docker-builder</em>)</li>
-                <li class="fragment"><span style="color: rgb(190, 100, 50)">deployment: </span>image and settings for it: replication controller (desired running state), trigger policies, and deployment strategy</li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">application: </span>one or more pods linked together by services; distinct, interconnected components</li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">config: </span>collection of objects describing combination of pods, services, replication controllers, environment variables, and other components</li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">template: </span>parameterised version of config for generalised reuse</li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">build config: </span>object defining source code URI, authentication for change notifications (webhooks), and build type (<em>source-to-image</em> or <em>docker-builder</em>)</li>
+                <li class="fragment"><span style="color: rgb(190, 100, 50); font-weight: bold;">deployment: </span>image and settings for it: replication controller (desired running state), trigger policies, and deployment strategy</li>
             </ul>
         </div>
     </section>
@@ -326,13 +326,6 @@ A /usr/share/doc/wget-1.12
             <li><a href="http://www.openshift.org/" target="_blank">OpenShift Origin website</a></li>
             <li><a href="https://blog.openshift.com/openshift-v3-deep-dive-docker-kubernetes/" target="_blank">OpenShift v3 Deep Dive Tutorial</a></li>
             <li><a href="https://blog.openshift.com/openshift-v3-platform-combines-docker-kubernetes-atomic-and-more/" target="_blank">OpenShift v3 Platform Announcement</a></li>
-        </ul>
-    </section>
-    <section>
-        <h2>Image Credits</h2>
-        <ul>
-            <li><a href="http://en.wikipedia.org/wiki/File:ArchitectureCartoon.png" target="_blank">Enteprise Architecture (Equilibrioception, Public Domain)</a></li>
-            <li><a href="https://openclipart.org" target="_blank">Open ClipArt</a></li>
         </ul>
     </section>
 </section>
