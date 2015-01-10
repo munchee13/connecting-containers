@@ -14,20 +14,32 @@
     </section>
     <section>
         <h2>Deployment Styles</h2>
+    </section>
+    <section>
         <div>
-            <ul>
-                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">Wait and See: </span> <span class="fragment">request server </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait some more </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request deployment </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> while (environment issues) { reattempt deployment; wait } </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in production</span></li>
-                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">Resource Loop: </span><span class="fragment">request server </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request deployment </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in production </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> app fails under load </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request server...</span></li>
-                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">Procure Cure: </span><span class="fragment">attempt to navigate IT Service Desk software </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> fail </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> acquire server on the sly </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in&nbsp;"production" </span></li>
-                <li class="fragment"><span style="color: rgb(190, 100, 50); font-weight: bold;">Friends in High Places: </span><span class="fragment">communication breakdown with Ops </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> call in Chuck Norris </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> Norris whispers "you better run" </span><span class="fragment"> <span style="color: rgb(190, 100, 50)">>></span> the app runs</span></li>
-            </ul>
-         </div>
+            <span style="color: rgb(190, 100, 50); font-weight: bold;">Wait and See: </span> <span class="fragment">request server </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait some more </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request deployment </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> while (environment issues) { reattempt deployment; wait } </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in production</span>
+        </div>
+    </section>
+    <section>
+        <div>
+             <span style="color: rgb(190, 100, 50); font-weight: bold;">Resource Loop: </span><span class="fragment">request server </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request deployment </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in production </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> app fails under load </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request server...</span>
+        </div>
+    </section>
+    <section>
+        <div>
+            <span style="color: rgb(190, 100, 50); font-weight: bold;">Procure Cure: </span><span class="fragment">attempt to navigate IT Service Desk software </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> fail </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> acquire server on the sly </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in&nbsp;"production" </span>
+        </div>
+    </section>
+    <section>
+        <div>
+            <span style="color: rgb(190, 100, 50); font-weight: bold;">Friends in High Places: </span><span class="fragment">communication breakdown with Ops </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> call in Chuck Norris </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> Norris whispers "you better run" </span><span class="fragment"> <span style="color: rgb(190, 100, 50)">>></span> the app runs</span>
+        </div>
     </section>
     <section>
         <h2>Aims</h2>
         <ul style="list-style-type: square;">
-            <li class="fragment">Freedom to choose best tool/tech for the job, without config headaches</li>
-            <li class="fragment">Fast, easy, reproducible deployments, that can be made up of small components wired together (&agrave; la microservices)</li>
+            <li class="fragment">Freedom to choose best tool for the job, without config headaches</li>
+            <li class="fragment">Fast, easy, reproducible deployments, made up of small components wired together (&agrave; la microservices)</li>
             <li class="fragment">Ability to scale pieces of a solution independently, to meet changing demand</li>
             <li class="fragment">End battles between Dev and Ops; automated deployment pipeline; CI/CD</li>
             <li class="fragment">Efficient resource usage</li>
@@ -98,7 +110,7 @@
               <td style="vertical-align: middle;">
                 <ul>
                   <li>In Docker parlance, a <em>container</em> is a running instance of an <em>image</em></li>
-                  <li>Based on linux containers (namepaces, control groups)</li>
+                  <li>Based on linux containers (namespaces, control groups)</li>
                   <li>Combines file system <em>layers</em> into a "Union File System"</li>
                   <li>Includes all of the components necessary to run a process, store persistent data, or both</li>
                 </ul>
@@ -149,7 +161,7 @@ A /usr/share/doc/wget-1.12
 ...</code></pre>
     </section>
     <section>
-      <h2>Docker Containers as Daemons</h2>
+      <h2>Containers as Daemons</h2>
       <img style="height: 400px;" src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/docker_bunny.png" alt="Docker Containers Just Keep Going..." />
       <p>A docker container runs until:</p>
       <ul>
@@ -228,7 +240,7 @@ A /usr/share/doc/wget-1.12
             <ul style="list-style-type: none;">
                 <li class="fragment" data-fragment-index="1" style="padding-bottom: 5px;"><span style="font-weight: bold; color: rgb(190, 100, 50);">pod: </span>colocated group of Docker containers that share an IP and storage volumes</li>
                 <li class="fragment" data-fragment-index="2" style="padding-bottom: 5px;"><span style="font-weight: bold; color: rgb(190, 100, 50);">service: </span>provides a single, stable name for set of pods and acts as basic load balancer</li>
-                <li class="fragment" data-fragment-index="3" style="padding-bottom: 5px;"><span style="font-weight: bold; color: rgb(190, 100, 50);">replication controller: </span>manages the lifecycle of pods and ensures specified number are running at any time</li>
+                <li class="fragment" data-fragment-index="3" style="padding-bottom: 5px;"><span style="font-weight: bold; color: rgb(190, 100, 50);">replication controller: </span>manages the lifecycle of pods and ensures specified number are running</li>
                 <li class="fragment" data-fragment-index="4"><span style="font-weight: bold; color: rgb(190, 100, 50);">label: </span>used to organise and select groups of objects</li>
             </ul>
         </div>
@@ -272,7 +284,7 @@ A /usr/share/doc/wget-1.12
                 <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">config: </span>collection of objects describing combination of pods, services, replication controllers, environment variables, and other components</li>
                 <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">template: </span>parameterised version of config for generalised reuse</li>
                 <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">build config: </span>object defining source code URI, authentication for change notifications (webhooks), and build type (<em>source-to-image</em> or <em>docker-builder</em>)</li>
-                <li class="fragment"><span style="color: rgb(190, 100, 50); font-weight: bold;">deployment: </span>image and settings for it: replication controller (desired running state), trigger policies, and deployment strategy</li>
+                <li class="fragment"><span style="color: rgb(190, 100, 50); font-weight: bold;">deployment: </span>image and settings for it: replication controller, trigger policies, and deployment strategy</li>
             </ul>
         </div>
     </section>
@@ -298,11 +310,11 @@ A /usr/share/doc/wget-1.12
     </section>
     <section>
         <h2 style="color: rgb(190, 100, 50)">Wins</h2>
-        <div class="fragment">Build a single artifact containing the dependency chain for reproducible deployments</div>
-        <div class="fragment" style="margin-top: 20px;">Share common technology stacks and common patterns for rolling out changes, with everything templated</div>
-        <div class="fragment" style="margin-top: 20px;">Manage thousands of applications with teams, auto-scaling components independently and updating them en masse when required</div>
-        <div class="fragment" style="margin-top: 20px;">Easily provision new resources at scale and subdivide them for teams</div>
-        <div class="fragment" style="margin-top: 20px;">Platform aware of and able to respond to changes, for a fault-tolerant, automated, and repeatable build and deployment process</div>
+        <div class="fragment">Build a single artifact containing the dependency chain for <strong>reproducible deployments</strong></div>
+        <div class="fragment" style="margin-top: 20px;"><strong>Share</strong> common technology stacks and common <strong>patterns</strong> for rolling out changes</div>
+        <div class="fragment" style="margin-top: 20px;"><strong>Efficiently manage</strong> thousands of applications, auto-scaling components independently and updating them en masse</div>
+        <div class="fragment" style="margin-top: 20px;"><strong>Easily provision</strong> new resources at scale and subdivide them for teams</div>
+        <div class="fragment" style="margin-top: 20px;">Responsive, change-aware platform supports <strong>fault-tolerant, automated, and repeatable</strong> builds and deployments</div>
         <div class="fragment roll-in" style="z-index: 2; position: absolute; top: 200px; left: 230px;"><img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/norris.gif" style="width: 500px;" /></div>
     </section>
 </section>
