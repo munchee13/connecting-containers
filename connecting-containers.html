@@ -13,24 +13,44 @@
         </p>
     </section>
     <section>
+        <h2>Deployment Styles</h2>
+        <div>
+            <ul>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">Wait and See: </span> <span class="fragment">request server </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait some more </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request deployment </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> while (environment issues) { wait; reattempt deployment } </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in production</span></li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">Resource Loop: </span><span class="fragment">request server </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> wait </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request deployment </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in production </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> app fails under load </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> request server...</span></li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50); font-weight: bold;">Procure Cure: </span><span class="fragment">attempt to navigate IT Service Desk software </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> fail </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> acquire server on the sly </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> in "production" </span></li>
+                <li class="fragment"><span style="color: rgb(190, 100, 50); font-weight: bold;">Friends in High Places: </span><span class="fragment">communication breakdown with Ops </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> call in Chuck Norris </span><span class="fragment"><span style="color: rgb(190, 100, 50)">>></span> Norris whispers "you better run" </span><span class="fragment"> <span style="color: rgb(190, 100, 50)">>></span> the app runs</span></li>
+            </ul>
+         </div>
+    </section>
+    <section>
+        <h2>Aims</h2>
+        <ul style="list-style-type: square;">
+            <li class="fragment">Freedom to choose best tool/tech for the job, without config headaches</li>
+            <li class="fragment">Fast, easy, reproducible deployments, that can be made up of small components we wire together (a la microservices)</li>
+            <li class="fragment">Ability to scale pieces of a solution independently, to meet changing demand</li>
+            <li class="fragment">End battles between Dev Ops; automated deployment pipeline; CI/CD</li>
+            <li class="fragment">Efficient resource usage</li>
+            <li class="fragment">Secure production code; ability to respond quickly to issues</li>
+        </ul>
     </section>
 </section>
 <!-- Introduction to PaaS/OpenShift -->
 <section>
     <section>
         <h2>Platform as a Service</h2>
+        <img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/cowsplatform.jpg" style="width: 500px;"/>
     </section>
     <section>
         <img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/paas.png" style="height: 600px; padding: 20px; background-color: rgba(255, 255, 255, 0.25);" />
-    </section>
-    <section>
-        <h2>OpenShift</h2>
     </section>
     <section>
         <img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/openshift-triangle.png" style="max-height: 500px; padding: 20px; background-color: white;"/>
     </section>
     <section>
         <h2>Reasons to Rebuild</h2>
+        <div class="fragment">Act on lessons from the past three years of running a PaaS</div>
+        <div class="fragment" style="padding-top: 20px;">New technologies to build on, including Docker image-based packaging and large associated ecosystem</div>
     </section>
     <section>
         <h2>The New Stack</h2>
@@ -62,7 +82,7 @@
     	<h3 class=fragment>Includes <a href="http://cockpit-project.org/" target="_blank">a console for management </a></h3>
     </section>    
     <section>
-        <h2>Wins</h2>
+        <h2 style="color: rgb(190, 100, 50)">Wins</h2>
     </section>
 </section>
 <!-- Docker Overview -->
@@ -177,7 +197,7 @@ A /usr/share/doc/wget-1.12
           </table>
         </section>
         <section>
-            <h2>Wins</h2>
+            <h2 style="color: rgb(190, 100, 50)">Wins</h2>
         </section>
 </section>
 <!-- Kubernetes Overview -->
@@ -206,10 +226,10 @@ A /usr/share/doc/wget-1.12
         <div style="float: left; max-width: 320px;"><span class="fragment" data-fragment-index="1"><img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/pod.png"></span><span class="fragment" data-fragment-index="2"><img style="background: white;" src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/service.png"></span></div>
         <div style="float: right; max-width: 640px; padding-top: 20px;">
             <ul style="list-style-type: none;">
-                <li class="fragment" data-fragment-index="1" style="padding-bottom: 5px"><strong>pod: </strong>colocated group of Docker containers that share an IP and storage volumes</li>
-                <li class="fragment" data-fragment-index="2" style="padding-bottom: 5px"><strong>service: </strong>provides a single, stable name for set of pods and acts as basic load balancer</li>
-                <li class="fragment" data-fragment-index="3" style="padding-bottom: 5px"><strong>replication controller: </strong>manages the lifecycle of pods and ensures specified number are running at any time</li>
-                <li class="fragment" data-fragment-index="4"><strong>label: </strong>used to organise and select groups of objects</li>
+                <li class="fragment" data-fragment-index="1" style="padding-bottom: 5px;"><span style="font-weight: bold; color: rgb(190, 100, 50);">pod: </span>colocated group of Docker containers that share an IP and storage volumes</li>
+                <li class="fragment" data-fragment-index="2" style="padding-bottom: 5px;"><span style="font-weight: bold; color: rgb(190, 100, 50);">service: </span>provides a single, stable name for set of pods and acts as basic load balancer</li>
+                <li class="fragment" data-fragment-index="3" style="padding-bottom: 5px;"><span style="font-weight: bold; color: rgb(190, 100, 50);">replication controller: </span>manages the lifecycle of pods and ensures specified number are running at any time</li>
+                <li class="fragment" data-fragment-index="4"><span style="font-weight: bold; color: rgb(190, 100, 50);">label: </span>used to organise and select groups of objects</li>
             </ul>
         </div>
     </section>
@@ -218,15 +238,15 @@ A /usr/share/doc/wget-1.12
         <div style="float: left; max-width: 320px;"><img class="fragment" style="border: none; box-shadow: none; background: inherit;" src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/components.png"></div>
         <div style="float: right; max-width: 640px; padding-top: 20px;">
             <ul style="list-style-type: none;">
-                <li class="fragment" style="padding-bottom: 5px"><strong>cluster: </strong>compute resources on top of which containers are built</li>
-                <li class="fragment" style="padding-bottom: 5px"><strong>node: </strong>Docker host running <em>kubelet</em> (node agent) and <em>proxy</em> services</li>
-                <li class="fragment" style="padding-bottom: 5px"><strong>master: </strong>hosts cluster-level control services, including the API server, scheduler, and controller manager</li>
-                <li class="fragment"><strong>etcd: </strong>distributed key-value store used to persist system state</li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="font-weight: bold; color: rgb(190, 100, 50);">cluster: </span>compute resources on top of which containers are built</li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="font-weight: bold; color: rgb(190, 100, 50);">node: </span>Docker host running <em>kubelet</em> (node agent) and <em>proxy</em> services</li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="font-weight: bold; color: rgb(190, 100, 50);">master: </span>hosts cluster-level control services, including the API server, scheduler, and controller manager</li>
+                <li class="fragment"><span style="font-weight: bold; color: rgb(190, 100, 50);">etcd: </span>distributed key-value store used to persist system state</li>
             </ul>
         </div>
     </section>
      <section>
-        <h2>Wins</h2>
+        <h2 style="color: rgb(190, 100, 50)">Wins</h2>
         <h3 class="fragment">Runtime and operational management of containers</h3>
         <div class="fragment" style="margin-top: 20px;">Manage related Docker containers as a unit</div>
         <div class="fragment" style="margin-top: 20px;">Container communication across hosts</div>
@@ -241,18 +261,18 @@ A /usr/share/doc/wget-1.12
     </section>
     <section>
         <h2>Design Goal</h2>
-        <h3>Kubernetes provides a container runtime</h3>
-        <h3>OpenShift provides the DevOps and team environment</h3>
+        <h3><span style="color: rgb(190, 100, 50)">Kubernetes</span> provides a </br>container runtime</h3>
+        <h3><span style="color: rgb(190, 100, 50)">OpenShift</span> provides the </br>DevOps and team environment</h3>
     </section>
     <section>
         <h2>Concepts</h2>
         <div>
             <ul style="list-style-type: none;">
-                <li class="fragment" style="padding-bottom: 5px"><strong>application: </strong>one or more pods linked together by services; distinct, interconnected components</li>
-                <li class="fragment" style="padding-bottom: 5px"><strong>config: </strong>collection of objects describing combination of pods, services, replication controllers, environment variables, and other components</li>
-                <li class="fragment" style="padding-bottom: 5px"><strong>template: </strong>parameterised version of config for generalised reuse</li>
-                <li class="fragment" style="padding-bottom: 5px"><strong>build config: </strong>object defining source code URI, authentication for change notifications (webhooks), and build type (<em>source-to-image</em> or <em>docker-builder</em>)</li>
-                <li class="fragment"><strong>deployment: </strong>image and settings for it: replication controller (desired running state), trigger policies, and deployment strategy</li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50)">application: </span>one or more pods linked together by services; distinct, interconnected components</li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50)">config: </span>collection of objects describing combination of pods, services, replication controllers, environment variables, and other components</li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50)">template: </span>parameterised version of config for generalised reuse</li>
+                <li class="fragment" style="padding-bottom: 5px;"><span style="color: rgb(190, 100, 50)">build config: </span>object defining source code URI, authentication for change notifications (webhooks), and build type (<em>source-to-image</em> or <em>docker-builder</em>)</li>
+                <li class="fragment"><span style="color: rgb(190, 100, 50)">deployment: </span>image and settings for it: replication controller (desired running state), trigger policies, and deployment strategy</li>
             </ul>
         </div>
     </section>
@@ -277,7 +297,7 @@ A /usr/share/doc/wget-1.12
         <img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/demo.gif" style="width: 700px;" />
     </section>
     <section>
-        <h2>Wins</h2>
+        <h2 style="color: rgb(190, 100, 50)">Wins</h2>
         <div class="fragment">Build a single artifact containing the dependency chain for reproducible deployments</div>
         <div class="fragment" style="margin-top: 20px;">Share common technology stacks and common patterns for rolling out changes, with everything templated</div>
         <div class="fragment" style="margin-top: 20px;">Manage thousands of applications with teams, auto-scaling components independently and updating them en masse when required</div>
