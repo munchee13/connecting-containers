@@ -96,8 +96,8 @@
     <section>
         <h2 style="color: rgb(190, 100, 50)">Wins</h2>
         	<div class="fragment">Fast boot: OS with just the good parts</div>
-        	<div class="fragment">Container management and security is it's speciality</div>
-        	<div class="fragment">Friggin' awesome kernl</div>
+        	<div class="fragment">Container management and security is its speciality</div>
+        	<div class="fragment">Friggin' awesome kernel</div>
         </ol>
     </section>
 </section>
@@ -112,7 +112,7 @@
             <tr>
               <td><img style="height: 300px;" src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/docker_container.jpg" alt="Diagram of a multi-layered docker container" /></td>
               <td style="vertical-align: middle;">
-                <ul>
+                <ul style="list-style-type: square;">
                   <li>In Docker parlance, a <em>container</em> is a running instance of an <em>image</em></li>
                   <li>Based on linux containers (namespaces, control groups)</li>
                   <li>Combines file system <em>layers</em> into a "Union File System"</li>
@@ -168,7 +168,7 @@ A /usr/share/doc/wget-1.12
       <h2>Containers as Daemons</h2>
       <img style="height: 400px;" src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/docker_bunny.png" alt="Docker Containers Just Keep Going..." />
       <p>A docker container runs until:</p>
-      <ul>
+      <ul style="list-style-type: square;">
         <li>The process inside it exits <em>or</em></li>
         <li>You stop it with <code>docker stop &lt;container_name&gt;</code></li>
       </ul>
@@ -179,7 +179,7 @@ A /usr/share/doc/wget-1.12
             <tr>
               <td><img style="background-color: #FFF;" src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/docker_links.png" alt="Docker links diagram" /></td>
               <td style="vertical-align: middle;">
-                <ul>
+                <ul style="list-style-type: square;">
                   <li>Containers on the same host can be linked together</li>
                   <li>Links between containers are not accessible outside the host</li>
                   <li>Links are shared via ENV and /etc/hosts</li>
@@ -194,7 +194,7 @@ A /usr/share/doc/wget-1.12
             <tr>
               <td>
                 <p>PROS:</p>
-                <ul>
+                <ul style="list-style-type: square;">
                   <li>Extreme application portability</li>
                   <li>Very easy to create and work with derivative images</li>
                   <li>Fast boot on containers</li>
@@ -203,7 +203,7 @@ A /usr/share/doc/wget-1.12
               <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
               <td>
                 <p>CONS:</p>
-                <ul>
+                <ul style="list-style-type: square;">
                   <li>Host-centric solution; not aware of anything else</li>
                   <li>No higher-level provisioning</li>
                   <li>No usage tracking / reporting</li>
@@ -332,18 +332,18 @@ A /usr/share/doc/wget-1.12
 <section>
     <section>
         <h2>Conclusion</h2>
-        <ol>
-        	<li class="fragment">Rough Roadmap</li>
+        <ul style="list-style-type: square;">
+        	<li class="fragment">Rough roadmap</li>
         	<li class="fragment">For us, it's the Linux story again</li>
-        	<li class="fragment">Your world as a sysadmin or developer is looking bright!</li>
-        </ol>
+        	<li class="fragment">Your world as a sys admin or developer is looking bright </li>
+        </ul>
     </section>
 </section>
 <!-- References/Resources -->
 <section>
     <section>
         <h2>References and Resources</h2>
-        <ul>
+        <ul style="list-style-type: square;">
             <li><a href="http://reinvent-hripps.rhcloud.com/#/2" target="_blank">Docker, Kubernetes, and OpenShift 3 labs</a></li>
             <li><a href="http://docker.io/" target="_blank">Docker website</a></li>
             <li><a href="https://github.com/GoogleCloudPlatform/kubernetes" target="_blank">Kubernetes source</a></li>
