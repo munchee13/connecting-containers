@@ -82,9 +82,10 @@
         <img src="https://raw.githubusercontent.com/codemiller/connecting-containers/gh-pages/images/projectatomic.png" style="width: 350px;padding: 20px;"/>
     </section>
     <section>
-    	<h2>New infrastructure and learning</h2>
+    	<h2>Why touch the OS</h2>
+    	<h3>Change happens!</h3>
     	<h3 class="fragment">Virtualisation and then Cloud</h3>
-    	<h3 class="fragment">A lot of experience with Linux</h3>
+    	<h3 class="fragment">A lot of experience with Linux and the growth of containers</h3>
     </section>
     <section>
     	<h2>RPM-OSTree</h2>
@@ -152,7 +153,7 @@ exit</code></pre>
         </section>
         <section>
           <h2>"Diffing" a Container</h2>
-          <p>Run a Docker image and perform some actions:</p>
+          <p>Add a label to a docker container and install wget:</p>
           <pre><code>$ docker run -i -t --name="add_wget" nhripps/centos /bin/bash
 bash-4.1# yum install -y wget
 ...
